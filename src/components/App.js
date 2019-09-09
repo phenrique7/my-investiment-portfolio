@@ -1,10 +1,10 @@
-import { Provider } from 'reakit';
 import Home from './home/Home';
+import Providers from '../context/Providers';
 
 export default function App() {
   return (
-    <Provider>
+    <Providers>
       <Home />
-    </Provider>
+    </Providers>
   );
 }

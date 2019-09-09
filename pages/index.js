@@ -1,5 +1,4 @@
-import '../assets/style.css';
-import App from '../components/App';
+import App from '../src/components/App';
 
 export default function Index() {
   return <App />;
