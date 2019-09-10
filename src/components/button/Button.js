@@ -1,7 +1,7 @@
 import React from 'react';
 import { Button as ReakitButton } from 'reakit';
 import PropTypes from 'prop-types';
-import { defaultColor, primaryColor } from 'styles/colors';
+import { defaultColor, primaryColor } from 'src/styles/colors';
 
 export default function Button({ children, ...props }) {
   const {
@@ -27,7 +27,7 @@ export default function Button({ children, ...props }) {
         ${bgColor.normal}
         hover:${bgColor.darker}
         ${textColor}
-        font-bold
+        font-normal
         py-2 px-4
         rounded
         focus:shadow-outline

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button } from 'reakit';
+import Button from 'src/components/button/Button';
 
 export default function Home() {
   const [count, setCount] = React.useState(0);
@@ -7,18 +7,7 @@ export default function Home() {
   return (
     <>
       <p>count: {count}</p>
-      <Button
-        className={`
-          bg-blue-500
-          hover:bg-blue-700
-          text-white
-          font-bold
-          py-2 px-4
-          rounded
-          focus:shadow-outline
-        `}
-        onClick={() => setCount(count + 1)}
-      >
+      <Button onClick={() => setCount(count + 1)}>
         Trigger
       </Button>
     </>

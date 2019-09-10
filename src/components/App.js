@@ -1,5 +1,5 @@
-import Home from './home/Home';
-import Providers from '../context/Providers';
+import Home from 'src/components/home/Home';
+import Providers from 'src/context/Providers';
 
 export default function App() {
   return (
