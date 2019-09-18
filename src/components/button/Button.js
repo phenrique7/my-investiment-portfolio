@@ -11,6 +11,7 @@ function buttonStyles(styleProps) {
     kind,
     textColor,
     roundedFull,
+    widthFull,
     disabled,
   } = styleProps;
 
@@ -32,6 +33,7 @@ function buttonStyles(styleProps) {
     py-2 px-4
     rounded
     focus:shadow-outline
+    ${widthFull ? 'w-full' : ''}
     ${roundedFull ? 'rounded-full' : ''}
     ${disabled ? 'opacity-50 cursor-not-allowed' : ''}
   `;
@@ -75,6 +77,7 @@ const buttonDefaultProps = {
   variant: 'contained',
   textColor: 'text-white',
   roundedFull: false,
+  widthFull: false,
   disabled: false,
 };
 
@@ -84,6 +87,7 @@ const buttonPropTypes = {
   variant: PropTypes.string,
   textColor: PropTypes.string,
   roundedFull: PropTypes.bool,
+  widthFull: PropTypes.bool,
   disabled: PropTypes.bool,
 };
 
