@@ -1,6 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Button as ReakitButton } from 'reakit';
+import {
+  Button as DefaultButton,
+  unstable_FormSubmitButton as FormSubmitButton,
+} from 'reakit';
 import { defaultColor, primaryColor } from 'src/styles/colors';
 
 /**
@@ -56,23 +59,34 @@ export const LinkButton = React.forwardRef((props, ref) => {
 
 export function Button({ children, ...props }) {
   const {
+    type,
     kind,
     textColor,
     roundedFull,
+    widthFull,
     disabled,
     ...otherProps
   } = props;
 
   const styles = buttonStyles(props);
 
+  if (type === 'submit') {
+    return (
+      <FormSubmitButton className={styles} {...otherProps}>
+        {children}
+      </FormSubmitButton>
+    );
+  }
+
   return (
-    <ReakitButton className={styles} {...otherProps}>
+    <DefaultButton className={styles} {...otherProps}>
       {children}
-    </ReakitButton>
+    </DefaultButton>
   );
 }
 
 const buttonDefaultProps = {
+  type: 'button',
   kind: 'primary',
   variant: 'contained',
   textColor: 'text-white',
@@ -83,6 +97,7 @@ const buttonDefaultProps = {
 
 const buttonPropTypes = {
   children: PropTypes.node.isRequired,
+  type: PropTypes.string,
   kind: PropTypes.string,
   variant: PropTypes.string,
   textColor: PropTypes.string,

@@ -15,7 +15,10 @@ export default function Home() {
           rel="stylesheet"
         />
       </Head>
-      <div className="h-screen">
+      <div
+        className="h-screen"
+        style={{ backgroundImage: 'url("/static/icons-fade-bg.png")' }}
+      >
         <img src="/static/home-attachment.png" alt="Home attachment" />
         <Box className="flex justify-center">
           <Box className="w-64 flex flex-col mt-5">
@@ -31,7 +34,9 @@ export default function Home() {
             </span>
             <Box className="flex justify-center mt-6">
               <Link href={routes['customer-profile']}>
-                <Button widthFull roundedFull>Começar</Button>
+                <Button widthFull roundedFull>
+                  Começar
+                </Button>
               </Link>
             </Box>
           </Box>
