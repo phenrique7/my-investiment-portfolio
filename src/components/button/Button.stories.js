@@ -1,27 +1,33 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import Button from './Button';
+import { MdArrowForward } from 'react-icons/md';
+import { Button } from 'src/components/button/Button';
+import Icon from 'src/components/icon/Icon';
+
+const Decorator = storyFn => (
+  <div
+    style={{
+      padding: '10px',
+      display: 'flex',
+      width: '350px',
+      justifyContent: 'space-between',
+    }}
+  >
+    {storyFn()}
+  </div>
+);
 
 storiesOf('Button', module)
+  .addDecorator(Decorator)
   .add('primary', () => (
-    <div
-      style={{
-        padding: '10px',
-        display: 'flex',
-        width: '350px',
-        justifyContent: 'space-between',
-      }}
-    >
-      <Button onClick={action('clicked')}>Primary</Button>
-      <Button onClick={action('clicked')} kind="default">
-        Default
-      </Button>
-      <Button onClick={action('clicked')} roundedFull>
-        Secondary
-      </Button>
-    </div>
+    <>
+      <Button>Primary</Button>
+      <Button kind="default">Default</Button>
+      <Button roundedFull>Secondary</Button>
+    </>
   ))
-  .add('secondary', () => (
-    <Button onClick={action('clicked')}>Secondary</Button>
+  .add('with icon', () => (
+    <Button>
+      Button with icon <Icon reactIcon={MdArrowForward} />
+    </Button>
   ));

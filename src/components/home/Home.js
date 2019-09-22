@@ -4,22 +4,34 @@ import { Box } from 'reakit/Box';
 import { LinkButton as Button } from 'src/components/button/Button';
 import routes from 'src/utils/routes';
 import Head from 'src/components/head/Head';
+import useMedia from 'src/hooks/useMedia';
 
 export default function Home() {
+  const match = useMedia('(max-width: 640px) ');
+
   return (
     <>
       <Head>
         <title>Minha Carteira de Investimentos</title>
         <link
-          href="https://fonts.googleapis.com/css?family=Comfortaa:600&display=swap"
+          href="https://fonts.googleapis.com/css?family=Vollkorn+SC:600,700&display=swap"
           rel="stylesheet"
         />
       </Head>
       <div
         className="h-screen"
-        style={{ backgroundImage: 'url("/static/icons-fade-bg.png")' }}
+        style={{
+          backgroundImage: 'url("/static/icons-fade-bg.png")',
+        }}
       >
-        <img src="/static/home-attachment.png" alt="Home attachment" />
+        <img
+          src={
+            match
+              ? '/static/home-attachment-mobile.png'
+              : '/static/home-attachment.png'
+          }
+          alt="Home attachment"
+        />
         <Box className="flex justify-center">
           <Box className="w-64 flex flex-col mt-5">
             <Box className="ml-auto mr-auto relative -top-4">
@@ -29,7 +41,7 @@ export default function Home() {
                 alt="Pie Chart"
               />
             </Box>
-            <span className="font-display text-center text-2xl">
+            <span className="font-display text-center font-bold text-2xl">
               Minha Carteira de Investimentos
             </span>
             <Box className="flex justify-center mt-6">

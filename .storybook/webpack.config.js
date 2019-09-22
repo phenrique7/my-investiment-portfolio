@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = async ({ config }) => {
-  config.resolve.modules.push(path.resolve(__dirname, '../src'));
+  config.resolve.modules.push(path.resolve(__dirname, '..'));
 
   config.module.rules.push({
     test: /\.css$/,
@@ -14,7 +14,7 @@ module.exports = async ({ config }) => {
         },
       },
     ],
-    include: path.resolve(__dirname, '../src/'),
+    include: path.resolve(__dirname, '..'),
   });
 
   return config;

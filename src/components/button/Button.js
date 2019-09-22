@@ -30,6 +30,8 @@ function buttonStyles(styleProps) {
     ${bgColor.normal}
     hover:${bgColor.darker}
     ${textColor}
+    inline-flex
+    items-center
     cursor-pointer
     text-center
     font-normal
