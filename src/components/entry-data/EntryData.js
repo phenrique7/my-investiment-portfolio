@@ -1,10 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Box } from 'reakit';
-import Link from 'next/link';
 import { Button } from 'src/components/button/Button';
 import Head from 'src/components/head/Head';
 import useMedia from 'src/hooks/useMedia';
+import { isEmptyObject } from 'src/helpers';
+import HeaderLogo from 'src/components/header-logo/HeaderLogo';
 import {
   unstable_useFormState as useFormState,
   unstable_Form as Form,
@@ -39,19 +40,21 @@ function EntryDataForm({ nextStage }) {
     },
   });
 
+  const validForm = isEmptyObject(form.errors);
+
   return (
     <Form className="w-full px-6 py-4" {...form}>
-      <div className="md:flex md:items-center mb-6">
-        <div className="md:w-1/5">
+      <div className="md-min:flex md-min:items-center mb-6">
+        <div className="md-min:w-1/5">
           <FormLabel
             name="name"
-            className="block text-left text-gray-500 font-bold mb-1 md:mb-0"
+            className="block text-left text-gray-500 font-bold mb-1 md-min:mb-0"
             {...form}
           >
             Nome
           </FormLabel>
         </div>
-        <div className="md:w-4/5">
+        <div className="md-min:w-4/5">
           <FormInput
             name="name"
             className="appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
@@ -64,17 +67,17 @@ function EntryDataForm({ nextStage }) {
           />
         </div>
       </div>
-      <div className="md:flex md:items-center mb-6">
-        <div className="md:w-1/5">
+      <div className="md-min:flex md-min:items-center mb-6">
+        <div className="md-min:w-1/5">
           <FormLabel
             name="email"
-            className="block text-left text-gray-500 font-bold mb-1 md:mb-0 pr-4"
+            className="block text-left text-gray-500 font-bold mb-1 md-min:mb-0 pr-4"
             {...form}
           >
             E-mail
           </FormLabel>
         </div>
-        <div className="md:w-4/5">
+        <div className="md-min:w-4/5">
           <FormInput
             type="email"
             name="email"
@@ -88,11 +91,16 @@ function EntryDataForm({ nextStage }) {
           />
         </div>
       </div>
-      <div className="md:flex md:items-center">
-        <div className="md:w-1/3" />
-        <div className="md:w-2/3">
-          <Button type="submit" onClick={nextStage} {...form}>
-            Próximo
+      <div className="md-min:flex md-min:items-center">
+        <div className="md-min:w-1/3" />
+        <div className="md-min:w-2/3">
+          <Button
+            type="submit"
+            onClick={nextStage}
+            disabled={!validForm}
+            {...form}
+          >
+            Continuar
           </Button>
         </div>
       </div>
@@ -112,23 +120,12 @@ export default function CustomerEntryData({ nextStage }) {
       <Head>
         <title>Perfil de Investidor</title>
       </Head>
-      <div className="h-screen">
-        <Box className="ml-auto mr-auto absolute p-2">
-          <Link href="/">
-            {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-            <a>
-              <img
-                src="/static/pie-chart.png"
-                className="w-12 block max-w-full"
-                alt="Pie Chart"
-              />
-            </a>
-          </Link>
-        </Box>
+      <Box className="h-screen">
+        <HeaderLogo />
         <Box className="flex justify-center h-full px-3 items-center">
           <Box className="w-108 flex flex-col">
-            <div className="overflow-hidden">
-              <div className="px-6 py-4">
+            <Box className="overflow-hidden">
+              <Box className="px-6 py-4">
                 <p className="text-gray-700 text-xl text-center">
                   Olá!{' '}
                   <img
@@ -137,12 +134,13 @@ export default function CustomerEntryData({ nextStage }) {
                     alt="👋"
                     src="https://s.w.org/images/core/emoji/11/svg/1f44b.svg"
                   />{' '}
-                  Antes de começar, preciso saber duas informações
-                  sobre você:
+                  Antes de começar a análise do seu perfil de
+                  investidor, preciso saber duas informações sobre
+                  você:
                 </p>
-              </div>
+              </Box>
               <EntryDataForm nextStage={nextStage} />
-            </div>
+            </Box>
           </Box>
           {matchMediaQuery || (
             <Box>
@@ -154,7 +152,7 @@ export default function CustomerEntryData({ nextStage }) {
             </Box>
           )}
         </Box>
-      </div>
+      </Box>
     </>
   );
 }

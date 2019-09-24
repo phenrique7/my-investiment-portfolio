@@ -27,10 +27,16 @@ function buttonStyles(styleProps) {
   }
 
   return `
-    ${bgColor.normal}
-    hover:${bgColor.darker}
-    ${textColor}
+    ${kind === 'outlined' ? 'bg-transparent' : bgColor.normal}
+    ${kind === 'outlined' ? 'border border-blue-500' : ''}
+    ${kind === 'outlined' ? 'text-blue-700' : textColor}
+    ${
+      kind === 'outlined'
+        ? 'hover:bg-gray-200'
+        : `hover:${bgColor.darker}`
+    }
     inline-flex
+    justify-center
     items-center
     cursor-pointer
     text-center

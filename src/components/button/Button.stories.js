@@ -28,6 +28,7 @@ storiesOf('Button', module)
   ))
   .add('with icon', () => (
     <Button>
-      Button with icon <Icon reactIcon={MdArrowForward} />
+      Button with icon
+      <Icon reactIcon={MdArrowForward} className="ml-2" />
     </Button>
   ));
