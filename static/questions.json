@@ -1,0 +1,66 @@
+[
+  {
+    "question": "Posso fazer backup apenas de arquivos alterados?",
+    "options": [
+      "Sim, suportamos o backup incremental por padrão",
+      "Usamos portas TCP padrão 80, 443 e 8119, sempre em HTTPs.",
+      "Usamos o timestamp para identificar arquivos modificados."
+    ]
+  },
+  {
+    "question": "Quais portas (TCP e UDP) o meu software precisa?",
+    "options": [
+      "Sim, suportamos o backup incremental por padrão",
+      "Usamos portas TCP padrão 80, 443 e 8119, sempre em HTTPs.",
+      "Usamos o timestamp para identificar arquivos modificados."
+    ]
+  },
+  {
+    "question": "Quanto de memória o processo de backup consome em uma estação?",
+    "options": [
+      "Sim, suportamos o backup incremental por padrão",
+      "Usamos portas TCP padrão 80, 443 e 8119, sempre em HTTPs.",
+      "Usamos o timestamp para identificar arquivos modificados."
+    ]
+  },
+  {
+    "question": "Qual é a taxa de compressão?",
+    "options": [
+      "Sim, suportamos o backup incremental por padrão",
+      "Usamos portas TCP padrão 80, 443 e 8119, sempre em HTTPs.",
+      "Usamos o timestamp para identificar arquivos modificados."
+    ]
+  },
+  {
+    "question": "Como funciona a senha mestre (master password)?",
+    "options": [
+      "Sim, suportamos o backup incremental por padrão",
+      "Usamos portas TCP padrão 80, 443 e 8119, sempre em HTTPs.",
+      "Usamos o timestamp para identificar arquivos modificados."
+    ]
+  },
+  {
+    "question": "Como CloudBackup Backup reconhece arquivos modificados?",
+    "options": [
+      "Sim, suportamos o backup incremental por padrão",
+      "Usamos portas TCP padrão 80, 443 e 8119, sempre em HTTPs.",
+      "Usamos o timestamp para identificar arquivos modificados."
+    ]
+  },
+  {
+    "question": "Por que o programa não parece começar quando eu inicializo o computador?",
+    "options": [
+      "Sim, suportamos o backup incremental por padrão",
+      "Usamos portas TCP padrão 80, 443 e 8119, sempre em HTTPs.",
+      "Usamos o timestamp para identificar arquivos modificados."
+    ]
+  },
+  {
+    "question": "Posso proteger meus dados com uma senha?",
+    "options": [
+      "Sim, suportamos o backup incremental por padrão",
+      "Usamos portas TCP padrão 80, 443 e 8119, sempre em HTTPs.",
+      "Usamos o timestamp para identificar arquivos modificados."
+    ]
+  }
+]

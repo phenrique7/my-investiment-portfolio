@@ -21,14 +21,14 @@ export default function Home() {
       <div
         className="h-screen"
         style={{
-          backgroundImage: 'url("/static/icons-fade-bg.png")',
+          backgroundImage: 'url("/static/images/icons-fade-bg.png")',
         }}
       >
         <img
           src={
             match
-              ? '/static/home-attachment-mobile.png'
-              : '/static/home-attachment.png'
+              ? '/static/images/home-attachment-mobile.png'
+              : '/static/images/home-attachment.png'
           }
           alt="Home attachment"
         />
@@ -36,7 +36,7 @@ export default function Home() {
           <Box className="w-64 flex flex-col mt-5">
             <Box className="ml-auto mr-auto relative -top-4">
               <img
-                src="/static/pie-chart.png"
+                src="/static/images/pie-chart.png"
                 className="w-32 block max-w-full"
                 alt="Pie Chart"
               />

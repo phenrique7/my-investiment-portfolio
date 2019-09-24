@@ -1,6 +1,6 @@
 import React from 'react';
 import Providers from 'src/context/Providers';
-import CustomerEntryData from 'src/components/entry-data/EntryData';
+import EntryData from 'src/components/entry-data/EntryData';
 import Quiz from 'src/components/quiz/Quiz';
 import Result from 'src/components/result/Result';
 
@@ -8,16 +8,16 @@ export default function CustomerProfile() {
   const [stage, setStage] = React.useState(0);
 
   function previousStage() {
-    setStage(prevStage => prevStage - 1);
+    setStage(prevState => prevState - 1);
   }
 
   function nextStage() {
-    setStage(prevStage => prevStage + 1);
+    setStage(prevState => prevState + 1);
   }
 
   function renderView() {
     if (stage === 0) {
-      return <CustomerEntryData nextStage={nextStage} />;
+      return <EntryData nextStage={nextStage} />;
     }
 
     if (stage >= 1 && stage <= 7) {

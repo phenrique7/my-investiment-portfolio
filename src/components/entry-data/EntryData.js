@@ -127,13 +127,13 @@ export default function CustomerEntryData({ nextStage }) {
             <Box className="overflow-hidden">
               <Box className="px-6 py-4">
                 <p className="text-gray-700 text-xl text-center">
-                  Olá!{' '}
+                  Olá!
                   <img
                     draggable="false"
-                    className="w-5 inline"
+                    className="w-5 inline mx-2"
                     alt="👋"
                     src="https://s.w.org/images/core/emoji/11/svg/1f44b.svg"
-                  />{' '}
+                  />
                   Antes de começar a análise do seu perfil de
                   investidor, preciso saber duas informações sobre
                   você:
@@ -147,7 +147,7 @@ export default function CustomerEntryData({ nextStage }) {
               <img
                 className="block"
                 alt="Dados de entrada do usuário"
-                src="/static/user-entry-data.png"
+                src="/static/images/user-entry-data.png"
               />
             </Box>
           )}

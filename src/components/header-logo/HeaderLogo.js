@@ -8,7 +8,7 @@ export default function HeaderLogo() {
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <a>
           <img
-            src="/static/pie-chart.png"
+            src="/static/images/pie-chart.png"
             className="w-12 block max-w-full"
             alt="Pie Chart"
           />

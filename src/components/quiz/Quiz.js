@@ -95,7 +95,7 @@ export default function Quiz({ stage, previousStage, nextStage }) {
               <img
                 className="block"
                 alt="Quiz"
-                src="/static/quiz.png"
+                src="/static/images/quiz.png"
               />
             </Box>
           )}
