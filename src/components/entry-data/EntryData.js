@@ -1,11 +1,12 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import Link from 'next/link';
 import { Box } from 'reakit';
-import { Button } from 'src/components/button/Button';
-import Head from 'src/components/head/Head';
+import { LinkButton as Button } from 'src/components/button/Button';
 import useMedia from 'src/hooks/useMedia';
 import { isEmptyObject } from 'src/helpers';
-import HeaderLogo from 'src/components/header-logo/HeaderLogo';
+import { UserProvider, useUser } from 'src/context/user-context';
+import { setStorage } from 'src/utils/storage';
+import { LS_USER_DATA_KEY } from 'src/utils/constants';
 import {
   unstable_useFormState as useFormState,
   unstable_Form as Form,
@@ -14,7 +15,8 @@ import {
   unstable_FormMessage as FormMessage,
 } from 'reakit/Form';
 
-function EntryDataForm({ nextStage }) {
+function EntryDataForm() {
+  const { setUser } = useUser();
   const form = useFormState({
     values: {
       name: '',
@@ -36,7 +38,17 @@ function EntryDataForm({ nextStage }) {
       }
     },
     onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
+      setUser(prevState => {
+        const newState = {
+          ...prevState,
+          email: values.email,
+          name: values.name,
+        };
+
+        setStorage(LS_USER_DATA_KEY, newState);
+
+        return newState;
+      });
     },
   });
 
@@ -94,69 +106,46 @@ function EntryDataForm({ nextStage }) {
       <div className="md-min:flex md-min:items-center">
         <div className="md-min:w-1/3" />
         <div className="md-min:w-2/3">
-          <Button
-            type="submit"
-            onClick={nextStage}
-            disabled={!validForm}
-            {...form}
-          >
-            Continuar
-          </Button>
+          <Link href="/questionario">
+            <Button type="submit" disabled={!validForm} {...form}>
+              Continuar
+            </Button>
+          </Link>
         </div>
       </div>
     </Form>
   );
 }
 
-EntryDataForm.propTypes = {
-  nextStage: PropTypes.func.isRequired,
-};
-
-export default function CustomerEntryData({ nextStage }) {
-  const matchMediaQuery = useMedia('(max-width: 1024px) ');
+export default function EntryData() {
+  const matchMediaQuery = useMedia('(max-width: 1024px)');
 
   return (
-    <>
-      <Head>
-        <title>Perfil de Investidor</title>
-      </Head>
-      <Box className="h-screen">
-        <HeaderLogo />
-        <Box className="flex justify-center h-full px-3 items-center">
-          <Box className="w-108 flex flex-col">
-            <Box className="overflow-hidden">
-              <Box className="px-6 py-4">
-                <p className="text-gray-700 text-xl text-center">
-                  Olá!
-                  <img
-                    draggable="false"
-                    className="w-5 inline mx-2"
-                    alt="👋"
-                    src="https://s.w.org/images/core/emoji/11/svg/1f44b.svg"
-                  />
-                  Antes de começar a análise do seu perfil de
-                  investidor, preciso saber duas informações sobre
-                  você:
-                </p>
-              </Box>
-              <EntryDataForm nextStage={nextStage} />
+    <Box className="h-screen">
+      <Box className="flex justify-center h-full px-3 items-center">
+        <Box className="w-108 flex flex-col">
+          <Box className="overflow-hidden">
+            <Box className="px-6 py-4">
+              <p className="text-gray-700 text-xl text-center">
+                Antes de começar a análise do seu perfil de
+                investidor, preciso saber duas informações sobre você:
+              </p>
             </Box>
+            <UserProvider>
+              <EntryDataForm />
+            </UserProvider>
           </Box>
-          {matchMediaQuery || (
-            <Box>
-              <img
-                className="block"
-                alt="Dados de entrada do usuário"
-                src="/static/images/user-entry-data.png"
-              />
-            </Box>
-          )}
         </Box>
+        {matchMediaQuery || (
+          <Box>
+            <img
+              className="block"
+              alt="Dados de entrada do usuário"
+              src="/static/images/user-entry-data.png"
+            />
+          </Box>
+        )}
       </Box>
-    </>
+    </Box>
   );
 }
-
-CustomerEntryData.propTypes = {
-  nextStage: PropTypes.func.isRequired,
-};

@@ -1,66 +1,58 @@
 [
   {
-    "question": "Posso fazer backup apenas de arquivos alterados?",
+    "question": "Quanto você tem para começar a investir?",
+    "options": []
+  },
+  {
+    "question": "Você tem idade de",
     "options": [
-      "Sim, suportamos o backup incremental por padrão",
-      "Usamos portas TCP padrão 80, 443 e 8119, sempre em HTTPs.",
-      "Usamos o timestamp para identificar arquivos modificados."
+      "Até 25 anos",
+      "26 a 35 anos",
+      "36 a 45 anos",
+      "46 a 55 anos"
     ]
   },
   {
-    "question": "Quais portas (TCP e UDP) o meu software precisa?",
+    "question": "Você pretende investir seu dinheiro por um período de tempo de",
     "options": [
-      "Sim, suportamos o backup incremental por padrão",
-      "Usamos portas TCP padrão 80, 443 e 8119, sempre em HTTPs.",
-      "Usamos o timestamp para identificar arquivos modificados."
+      "Até 12 meses",
+      "13 a 18 meses",
+      "19 a 24 meses",
+      "25 a 36 meses",
+      "mais de 36 meses"
     ]
   },
   {
-    "question": "Quanto de memória o processo de backup consome em uma estação?",
+    "question": "Sua experiência com investimentos pode ser descrita aproximadamente como alguém que",
     "options": [
-      "Sim, suportamos o backup incremental por padrão",
-      "Usamos portas TCP padrão 80, 443 e 8119, sempre em HTTPs.",
-      "Usamos o timestamp para identificar arquivos modificados."
+      "Está investindo pela primeira vez",
+      "Tem pouca experiência em investimentos, e que somente utiliza a poupança como reserva",
+      "Possui alguma experiência e já investiu em alguns ativos como fundos, CDBs ou Tesouro direto",
+      "Possui ampla experiência e conhece bem a respeito de ações e fundos multimercados"
     ]
   },
   {
-    "question": "Qual é a taxa de compressão?",
+    "question": "Nos investimentos, o que mais importa pra você?",
     "options": [
-      "Sim, suportamos o backup incremental por padrão",
-      "Usamos portas TCP padrão 80, 443 e 8119, sempre em HTTPs.",
-      "Usamos o timestamp para identificar arquivos modificados."
+      "Maximizar o potencial do ganho",
+      "Minimizar o risco de perdas",
+      "Um equilíbrio entre ambos"
     ]
   },
   {
-    "question": "Como funciona a senha mestre (master password)?",
+    "question": "Ao aplicar R$ 10 mil pelo prazo de um ano, você:",
     "options": [
-      "Sim, suportamos o backup incremental por padrão",
-      "Usamos portas TCP padrão 80, 443 e 8119, sempre em HTTPs.",
-      "Usamos o timestamp para identificar arquivos modificados."
+      "Prefere ter a certeza de resgatar no final do prazo R$ 11 mil",
+      "Aceitaria investir com 50% de probabilidade de lucrar e resgatar R$ 16 mil e 50% de probabilidade de perder e resgatar R$ 9 mil",
+      "Aceitaria investir com 50% de probabilidade de lucrar e resgatar R$ 20 mil e 50% de probabilidade de perder e resgatar R$ 7 mil"
     ]
   },
   {
-    "question": "Como CloudBackup Backup reconhece arquivos modificados?",
+    "question": "Se passados 12 meses seus investimentos apresentassem um desvalorização de 30%, você",
     "options": [
-      "Sim, suportamos o backup incremental por padrão",
-      "Usamos portas TCP padrão 80, 443 e 8119, sempre em HTTPs.",
-      "Usamos o timestamp para identificar arquivos modificados."
-    ]
-  },
-  {
-    "question": "Por que o programa não parece começar quando eu inicializo o computador?",
-    "options": [
-      "Sim, suportamos o backup incremental por padrão",
-      "Usamos portas TCP padrão 80, 443 e 8119, sempre em HTTPs.",
-      "Usamos o timestamp para identificar arquivos modificados."
-    ]
-  },
-  {
-    "question": "Posso proteger meus dados com uma senha?",
-    "options": [
-      "Sim, suportamos o backup incremental por padrão",
-      "Usamos portas TCP padrão 80, 443 e 8119, sempre em HTTPs.",
-      "Usamos o timestamp para identificar arquivos modificados."
+      "Resgataria todos os meus investimentos",
+      "Manteria meus investimentos",
+      "Manteria ou aumentaria meus investimentos, caso acreditasse que a decisão inicial foi correta"
     ]
   }
 ]
