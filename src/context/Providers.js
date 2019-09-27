@@ -1,12 +1,13 @@
 import React from 'react';
 import { Provider as ReakitProvider } from 'reakit';
+import { UserProvider } from 'src/context/user-context';
 import PropTypes from 'prop-types';
-import '../styles/tailwind.css';
+import 'src/styles/tailwind.css';
 
 export default function Providers({ children }) {
   return (
     <ReakitProvider>
-      {children}
+      <UserProvider>{children}</UserProvider>
     </ReakitProvider>
   );
 }

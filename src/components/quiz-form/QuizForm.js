@@ -113,19 +113,6 @@ export default function QuizForm() {
           <Box className="m-auto w-120 sm-max:w-auto">
             <Box className="px-6 py-4">
               <p className="text-gray-700 text-lg font-bold text-center">
-                {stage === 0 && (
-                  <>
-                    Olá, {name}
-                    <img
-                      draggable="false"
-                      className="w-5 inline mx-2"
-                      alt="👋"
-                      src="https://s.w.org/images/core/emoji/11/svg/1f44b.svg"
-                    />
-                    Preciso fazer algumas poucas perguntas. De
-                    antemão,
-                  </>
-                )}
                 Pergunta:
               </p>
             </Box>

@@ -72,7 +72,6 @@ export function Button({ children, ...props }) {
     textColor,
     roundedFull,
     widthFull,
-    disabled,
     ...otherProps
   } = props;
 

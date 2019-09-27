@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Box } from 'reakit';
-import { LinkButton as Button } from 'src/components/button/Button';
+import { LinkButton, Button } from 'src/components/button/Button';
 import useMedia from 'src/hooks/useMedia';
 import { isEmptyObject } from 'src/helpers';
 import { UserProvider, useUser } from 'src/context/user-context';
@@ -15,8 +16,7 @@ import {
   unstable_FormMessage as FormMessage,
 } from 'reakit/Form';
 
-function EntryDataForm() {
-  const { setUser } = useUser();
+function EntryDataForm({ setUser }) {
   const form = useFormState({
     values: {
       name: '',
@@ -38,21 +38,23 @@ function EntryDataForm() {
       }
     },
     onSubmit: values => {
-      setUser(prevState => {
-        const newState = {
-          ...prevState,
-          email: values.email,
-          name: values.name,
-        };
+      const userData = {
+        quizStage: 0,
+        email: values.email,
+        name: values.name,
+      };
 
-        setStorage(LS_USER_DATA_KEY, newState);
-
-        return newState;
+      setUser(() => {
+        setStorage(LS_USER_DATA_KEY, userData, true);
+        return userData;
       });
     },
   });
 
-  const validForm = isEmptyObject(form.errors);
+  const validForm =
+    isEmptyObject(form.errors) &&
+    form.values.name &&
+    form.values.email;
 
   return (
     <Form className="w-full px-6 py-4" {...form}>
@@ -106,44 +108,74 @@ function EntryDataForm() {
       <div className="md-min:flex md-min:items-center">
         <div className="md-min:w-1/3" />
         <div className="md-min:w-2/3">
-          <Link href="/questionario">
-            <Button type="submit" disabled={!validForm} {...form}>
-              Continuar
-            </Button>
-          </Link>
+          <Button type="submit" disabled={!validForm} {...form}>
+            Continuar
+          </Button>
         </div>
       </div>
     </Form>
   );
 }
 
+EntryDataForm.propTypes = {
+  setUser: PropTypes.func.isRequired,
+};
+
 export default function EntryData() {
   const matchMediaQuery = useMedia('(max-width: 1024px)');
+  const {
+    user: { name },
+    setUser,
+  } = useUser();
 
   return (
     <Box className="h-screen">
       <Box className="flex justify-center h-full px-3 items-center">
-        <Box className="w-108 flex flex-col">
-          <Box className="overflow-hidden">
-            <Box className="px-6 py-4">
-              <p className="text-gray-700 text-xl text-center">
-                Antes de começar a análise do seu perfil de
-                investidor, preciso saber duas informações sobre você:
-              </p>
+        {name ? (
+          <Box className="w-108">
+            <p className="text-gray-700 text-lg text-center">
+              Olá, {name}
+              <img
+                draggable="false"
+                className="w-5 inline mx-2"
+                alt="👋"
+                src="https://s.w.org/images/core/emoji/11/svg/1f44b.svg"
+              />
+              Algumas poucas perguntas serão feitas para que seja
+              possível identificar qual seu perfil de investidor e,
+              assim, poder sugerir melhor os investimentos que
+              correspondem ao seu perfil.
+            </p>
+            <Box className="mt-10 flex justify-center">
+              <Link href="/questionario">
+                <LinkButton>Continuar</LinkButton>
+              </Link>
             </Box>
-            <UserProvider>
-              <EntryDataForm />
-            </UserProvider>
           </Box>
-        </Box>
-        {matchMediaQuery || (
-          <Box>
-            <img
-              className="block"
-              alt="Dados de entrada do usuário"
-              src="/static/images/user-entry-data.png"
-            />
-          </Box>
+        ) : (
+          <>
+            <Box className="w-108 flex flex-col">
+              <Box className="overflow-hidden">
+                <Box className="px-6 py-4">
+                  <p className="text-gray-700 text-xl text-center">
+                    Antes de começar a análise do seu perfil de
+                    investidor, preciso saber duas informações sobre
+                    você:
+                  </p>
+                </Box>
+                <EntryDataForm setUser={setUser} />
+              </Box>
+            </Box>
+            {matchMediaQuery || (
+              <Box>
+                <img
+                  className="block"
+                  alt="Dados de entrada do usuário"
+                  src="/static/images/user-entry-data.png"
+                />
+              </Box>
+            )}
+          </>
         )}
       </Box>
     </Box>

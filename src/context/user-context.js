@@ -1,24 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { getStorage } from 'utils/storage';
-import { LS_USER_DATA_KEY } from 'utils/constants';
+import { getStorage } from 'src/utils/storage';
+import { LS_USER_DATA_KEY } from 'src/utils/constants';
 
 const UserContext = React.createContext();
 
-function state() {
-  const userData = getStorage(LS_USER_DATA_KEY);
-  const { name = '', email = '', quizStage = 0 } =
-    userData !== null ? JSON.parse(userData) : {};
-
-  return {
-    email,
-    name,
-    quizStage,
-  };
-}
-
 function UserProvider({ children }) {
-  const [user, setUser] = React.useState(state);
+  const [user, setUser] = React.useState({
+    email: '',
+    name: '',
+    quizStage: 0,
+  });
+
+  React.useEffect(() => {
+    const userData = getStorage(LS_USER_DATA_KEY);
+    const { name = '', email = '', quizStage = 0 } =
+      userData !== null ? JSON.parse(userData) : {};
+
+    setUser({
+      email,
+      name,
+      quizStage,
+    });
+  }, []);
 
   return (
     <UserContext.Provider
