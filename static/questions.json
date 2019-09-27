@@ -6,10 +6,22 @@
   {
     "question": "Você tem idade de",
     "options": [
-      "Até 25 anos",
-      "26 a 35 anos",
-      "36 a 45 anos",
-      "46 a 55 anos"
+      {
+        "score": 0,
+        "answer": "Até 25 anos"
+      },
+      {
+        "score": 0,
+        "answer": "26 a 35 anos"
+      },
+      {
+        "score": 0,
+        "answer": "36 a 45 anos"
+      },
+      {
+        "score": 0,
+        "answer": "46 a 55 anos"
+      }
     ]
   },
   {
@@ -23,7 +35,7 @@
     ]
   },
   {
-    "question": "Sua experiência com investimentos pode ser descrita aproximadamente como alguém que",
+    "question": "Sua experiência com investimentos pode ser descrita como alguém que",
     "options": [
       "Está investindo pela primeira vez",
       "Tem pouca experiência em investimentos, e que somente utiliza a poupança como reserva",

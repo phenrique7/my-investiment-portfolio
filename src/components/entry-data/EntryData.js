@@ -1,11 +1,10 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { Box } from 'reakit';
 import { LinkButton, Button } from 'src/components/button/Button';
 import useMedia from 'src/hooks/useMedia';
 import { isEmptyObject } from 'src/helpers';
-import { UserProvider, useUser } from 'src/context/user-context';
+import { useUser } from 'src/context/user-context';
 import { setStorage } from 'src/utils/storage';
 import { LS_USER_DATA_KEY } from 'src/utils/constants';
 import {
@@ -16,7 +15,12 @@ import {
   unstable_FormMessage as FormMessage,
 } from 'reakit/Form';
 
-function EntryDataForm({ setUser }) {
+export default function EntryData() {
+  const matchMediaQuery = useMedia('(max-width: 1024px)');
+  const {
+    user: { name },
+    setUser,
+  } = useUser();
   const form = useFormState({
     values: {
       name: '',
@@ -57,84 +61,12 @@ function EntryDataForm({ setUser }) {
     form.values.email;
 
   return (
-    <Form className="w-full px-6 py-4" {...form}>
-      <div className="md-min:flex md-min:items-center mb-6">
-        <div className="md-min:w-1/5">
-          <FormLabel
-            name="name"
-            className="block text-left text-gray-500 font-bold mb-1 md-min:mb-0"
-            {...form}
-          >
-            Nome
-          </FormLabel>
-        </div>
-        <div className="md-min:w-4/5">
-          <FormInput
-            name="name"
-            className="appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-            {...form}
-          />
-          <FormMessage
-            className="text-red-500 text-xs"
-            name="name"
-            {...form}
-          />
-        </div>
-      </div>
-      <div className="md-min:flex md-min:items-center mb-6">
-        <div className="md-min:w-1/5">
-          <FormLabel
-            name="email"
-            className="block text-left text-gray-500 font-bold mb-1 md-min:mb-0 pr-4"
-            {...form}
-          >
-            E-mail
-          </FormLabel>
-        </div>
-        <div className="md-min:w-4/5">
-          <FormInput
-            type="email"
-            name="email"
-            className="appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-            {...form}
-          />
-          <FormMessage
-            className="text-red-500 text-xs"
-            name="email"
-            {...form}
-          />
-        </div>
-      </div>
-      <div className="md-min:flex md-min:items-center">
-        <div className="md-min:w-1/3" />
-        <div className="md-min:w-2/3">
-          <Button type="submit" disabled={!validForm} {...form}>
-            Continuar
-          </Button>
-        </div>
-      </div>
-    </Form>
-  );
-}
-
-EntryDataForm.propTypes = {
-  setUser: PropTypes.func.isRequired,
-};
-
-export default function EntryData() {
-  const matchMediaQuery = useMedia('(max-width: 1024px)');
-  const {
-    user: { name },
-    setUser,
-  } = useUser();
-
-  return (
     <Box className="h-screen">
       <Box className="flex justify-center h-full px-3 items-center">
         {name ? (
           <Box className="w-108">
             <p className="text-gray-700 text-lg text-center">
-              Olá, {name}
+              Olá, <b>{name}</b>
               <img
                 draggable="false"
                 className="w-5 inline mx-2"
@@ -143,8 +75,8 @@ export default function EntryData() {
               />
               Algumas poucas perguntas serão feitas para que seja
               possível identificar qual seu perfil de investidor e,
-              assim, poder sugerir melhor os investimentos que
-              correspondem ao seu perfil.
+              assim, poder sugerir melhor os investimentos que se
+              adequam ao seu perfil.
             </p>
             <Box className="mt-10 flex justify-center">
               <Link href="/questionario">
@@ -163,7 +95,67 @@ export default function EntryData() {
                     você:
                   </p>
                 </Box>
-                <EntryDataForm setUser={setUser} />
+                <Form className="w-full px-6 py-4" {...form}>
+                  <div className="md-min:flex md-min:items-center mb-6">
+                    <div className="md-min:w-1/5">
+                      <FormLabel
+                        name="name"
+                        className="block text-left text-gray-500 font-bold mb-1 md-min:mb-0"
+                        {...form}
+                      >
+                        Nome
+                      </FormLabel>
+                    </div>
+                    <div className="md-min:w-4/5">
+                      <FormInput
+                        name="name"
+                        className="appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                        {...form}
+                      />
+                      <FormMessage
+                        className="text-red-500 text-xs"
+                        name="name"
+                        {...form}
+                      />
+                    </div>
+                  </div>
+                  <div className="md-min:flex md-min:items-center mb-6">
+                    <div className="md-min:w-1/5">
+                      <FormLabel
+                        name="email"
+                        className="block text-left text-gray-500 font-bold mb-1 md-min:mb-0 pr-4"
+                        {...form}
+                      >
+                        E-mail
+                      </FormLabel>
+                    </div>
+                    <div className="md-min:w-4/5">
+                      <FormInput
+                        type="email"
+                        name="email"
+                        className="appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                        {...form}
+                      />
+                      <FormMessage
+                        className="text-red-500 text-xs"
+                        name="email"
+                        {...form}
+                      />
+                    </div>
+                  </div>
+                  <div className="md-min:flex md-min:items-center">
+                    <div className="md-min:w-1/3" />
+                    <div className="md-min:w-2/3">
+                      <Button
+                        type="submit"
+                        disabled={!validForm}
+                        {...form}
+                      >
+                        Continuar
+                      </Button>
+                    </div>
+                  </div>
+                </Form>
               </Box>
             </Box>
             {matchMediaQuery || (

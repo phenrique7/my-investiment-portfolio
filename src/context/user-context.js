@@ -1,11 +1,14 @@
 import React from 'react';
+import Router, { useRouter } from 'next/router';
 import PropTypes from 'prop-types';
+import { isEmptyObject } from 'src/helpers';
 import { getStorage } from 'src/utils/storage';
 import { LS_USER_DATA_KEY } from 'src/utils/constants';
 
 const UserContext = React.createContext();
 
 function UserProvider({ children }) {
+  const { route } = useRouter();
   const [user, setUser] = React.useState({
     email: '',
     name: '',
@@ -13,16 +16,20 @@ function UserProvider({ children }) {
   });
 
   React.useEffect(() => {
-    const userData = getStorage(LS_USER_DATA_KEY);
-    const { name = '', email = '', quizStage = 0 } =
-      userData !== null ? JSON.parse(userData) : {};
+    const userDataStorage = getStorage(LS_USER_DATA_KEY);
+    const userData =
+      userDataStorage !== null ? JSON.parse(userDataStorage) : {};
 
-    setUser({
-      email,
-      name,
-      quizStage,
-    });
-  }, []);
+    if (!isEmptyObject(userData)) {
+      setUser({
+        email: userData.email,
+        name: userData.name,
+        quizStage: userData.quizStage,
+      });
+    } else if (route === '/questionario' || route === '/resultado') {
+      Router.push('/');
+    }
+  }, [route]);
 
   return (
     <UserContext.Provider

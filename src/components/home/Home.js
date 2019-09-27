@@ -20,6 +20,7 @@ export default function Home() {
             ? '/static/images/home-attachment-mobile.png'
             : '/static/images/home-attachment.png'
         }
+        className="w-full"
         alt="Home attachment"
       />
       <Box className="flex justify-center">
