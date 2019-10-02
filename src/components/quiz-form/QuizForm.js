@@ -3,12 +3,8 @@ import Router from 'next/router';
 import PropTypes from 'prop-types';
 import { Box } from 'reakit';
 import { useRadioState, Radio, RadioGroup } from 'reakit/Radio';
-import {
-  unstable_useFormState as useFormState,
-  unstable_Form as Form,
-  unstable_FormInput as FormInput,
-  unstable_FormMessage as FormMessage,
-} from 'reakit/Form';
+import useInputMask from 'src/hooks/useInputMask';
+import { createNumberMask } from 'text-mask-addons';
 import Icon from 'src/components/icon/Icon';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import { Button } from 'src/components/button/Button';
@@ -16,30 +12,17 @@ import { useUser } from 'src/context/user-context';
 import { setStorage } from 'src/utils/storage';
 import { LS_USER_DATA_KEY } from 'src/utils/constants';
 import questions from 'static/questions.json';
-import { isEmptyObject } from 'src/helpers';
 
-function FormOptions({ stage, previousStage, nextStage }) {
+function QuizOptions({ stage, previousStage, nextStage }) {
   const radio = useRadioState();
-  // const form = useFormState({
-  //   values: { initialInvestiment: '' },
-  //   onValidate: values => {
-  //     if (!values.initialInvestiment) {
-  //       const errors = {
-  //         initialInvestiment:
-  //           'Não esqueça de inserir sua quantia inicial de investimento',
-  //       };
-  //       throw errors;
-  //     }
-  //   },
-  //   onSubmit: values => {
-  //     nextStage();
-  //   },
-  // });
-
   const { options } = questions[stage];
 
+  function handleSubmit(event) {
+    event.preventDefault();
+  }
+
   return (
-    <form className="m-auto px-6 py-4">
+    <form className="m-auto px-6 py-4" onSubmit={handleSubmit}>
       <RadioGroup
         aria-label="fruits"
         className="flex flex-col text-gray-700"
@@ -61,7 +44,7 @@ function FormOptions({ stage, previousStage, nextStage }) {
           <Icon reactIcon={MdArrowBack} className="mr-2" />
           Voltar
         </Button>
-        <Button type="submit">
+        <Button type="submit" disabled={radio.state === undefined}>
           Próximo
           <Icon reactIcon={MdArrowForward} className="ml-2" />
         </Button>
@@ -70,66 +53,111 @@ function FormOptions({ stage, previousStage, nextStage }) {
   );
 }
 
-FormOptions.propTypes = {
+QuizOptions.propTypes = {
   stage: PropTypes.number.isRequired,
   previousStage: PropTypes.func.isRequired,
   nextStage: PropTypes.func.isRequired,
 };
 
-function FormInputField({ previousStage, nextStage }) {
-  const form = useFormState({
-    values: { initialInvestiment: '' },
-    onValidate: values => {
-      if (!values.initialInvestiment) {
-        const errors = {
-          initialInvestiment:
-            'Não esqueça de inserir sua quantia inicial de investimento',
-        };
-        throw errors;
+function SubmitButtonCustomized() {
+  const [buttonDisabled, setButtonDisabled] = React.useState(true);
+
+  React.useEffect(() => {
+    const mutationObserver = new MutationObserver(mutations => {
+      mutations.forEach(mutation => {
+        if (mutation.target.attributes['data-value'].textContent) {
+          setButtonDisabled(false);
+        } else {
+          setButtonDisabled(true);
+        }
+      });
+    });
+
+    mutationObserver.observe(
+      document.querySelector('input[name="initial-investiment"]'),
+      {
+        attributes: true,
+        characterData: true,
+        childList: false,
+        subtree: false,
+        attributeOldValue: false,
+        characterDataOldValue: false,
+      },
+    );
+
+    return () => {
+      mutationObserver.disconnect();
+    };
+  });
+
+  return (
+    <Button type="submit" disabled={buttonDisabled}>
+      Próximo
+      <Icon reactIcon={MdArrowForward} className="ml-2" />
+    </Button>
+  );
+}
+
+function QuizInput({ previousStage, nextStage }) {
+  const input = React.useRef(null);
+
+  const maskMoney = createNumberMask({
+    prefix: 'R$ ',
+    includeThousandsSeparator: true,
+    thousandsSeparatorSymbol: '.',
+    allowDecimal: true,
+    integerLimit: 9,
+    decimalSymbol: ',',
+    requireDecimal: true,
+  });
+
+  const onChange = useInputMask({
+    input,
+    onChange: e => e.target.value,
+    mask: value => {
+      const mask = maskMoney(value);
+      const decimalsRegex = /,([0-9]{1,2})/;
+      const result = decimalsRegex.exec(value);
+
+      if (!!result && result[1].length < 2) {
+        mask.push('0');
+      } else if (!result) {
+        mask.push('00');
       }
-    },
-    onSubmit: values => {
-      nextStage();
+
+      return mask;
     },
   });
 
-  const validForm =
-    isEmptyObject(form.errors) && form.values.initialInvestiment;
+  function handleSubmit(event) {
+    event.preventDefault();
+    console.log('input.current.value', input.current.value);
+  }
 
   return (
-    <Form className="relative" {...form}>
-      <FormInput
-        name="initialInvestiment"
-        type="text"
-        className="appearance-none border-2 border-gray-200 rounded w-full py-2 pl-12 pr-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
-        {...form}
-      />
-      <span
-        className="absolute text-gray-500"
-        style={{ top: '0.5rem', left: '1rem' }}
-      >
-        R${' '}
-      </span>
-      <FormMessage
-        name="initialInvestiment"
-        className="text-red-500 text-xs"
-        {...form}
-      />
+    <form onSubmit={handleSubmit}>
+      <label>
+        <input
+          name="initial-investiment"
+          type="text"
+          className="appearance-none border-2 border-gray-300 rounded w-full py-2 pl-4 pr-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+          ref={input}
+          onChange={onChange}
+          placeholder="valor inicial"
+        />
+      </label>
       <div className="flex justify-between mt-10">
         <Button onClick={previousStage} kind="outlined">
           <Icon reactIcon={MdArrowBack} className="mr-2" />
           Voltar
         </Button>
-        <Button type="submit" disabled={!validForm}>
-          Próximo
-          <Icon reactIcon={MdArrowForward} className="ml-2" />
-        </Button>
+        <SubmitButtonCustomized />
       </div>
-    </Form>
+    </form>
   );
 }
 
-FormInputField.propTypes = {
+QuizInput.propTypes = {
   previousStage: PropTypes.func.isRequired,
   nextStage: PropTypes.func.isRequired,
 };
@@ -196,12 +224,12 @@ export default function QuizForm() {
               </p>
             </Box>
             {stage === 0 ? (
-              <FormInputField
+              <QuizInput
                 previousStage={previousStage}
                 nextStage={nextStage}
               />
             ) : (
-              <FormOptions
+              <QuizOptions
                 stage={stage}
                 previousStage={previousStage}
                 nextStage={nextStage}

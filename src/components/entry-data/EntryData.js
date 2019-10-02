@@ -73,10 +73,10 @@ export default function EntryData() {
                 alt="👋"
                 src="https://s.w.org/images/core/emoji/11/svg/1f44b.svg"
               />
-              Algumas poucas perguntas serão feitas para que seja
-              possível identificar qual seu perfil de investidor e,
-              assim, poder sugerir melhor os investimentos que se
-              adequam ao seu perfil.
+              Algumas perguntas serão feitas para que seja possível
+              identificar qual é o seu perfil de investidor e, assim,
+              poder sugerir melhor os investimentos que se adequam ao
+              seu perfil.
             </p>
             <Box className="mt-10 flex justify-center">
               <Link href="/questionario">
@@ -109,7 +109,7 @@ export default function EntryData() {
                     <div className="md-min:w-4/5">
                       <FormInput
                         name="name"
-                        className="appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                        className="appearance-none border-2 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                         {...form}
                       />
                       <FormMessage
@@ -133,7 +133,7 @@ export default function EntryData() {
                       <FormInput
                         type="email"
                         name="email"
-                        className="appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
+                        className="appearance-none border-2 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                         {...form}
                       />
                       <FormMessage
