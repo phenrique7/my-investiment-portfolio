@@ -4,67 +4,121 @@
     "options": []
   },
   {
-    "question": "Você tem idade de",
+    "question": "Você tem idade",
     "options": [
       {
         "score": 0,
-        "answer": "Até 25 anos"
+        "answer": "de até 25 anos"
       },
       {
         "score": 0,
-        "answer": "26 a 35 anos"
+        "answer": "entre 26 a 35 anos"
       },
       {
         "score": 0,
-        "answer": "36 a 45 anos"
+        "answer": "entre 36 a 45 anos"
       },
       {
         "score": 0,
-        "answer": "46 a 55 anos"
+        "answer": "entre 46 a 55 anos"
       }
     ]
   },
   {
     "question": "Você pretende investir seu dinheiro por um período de tempo de",
     "options": [
-      "Até 12 meses",
-      "13 a 18 meses",
-      "19 a 24 meses",
-      "25 a 36 meses",
-      "mais de 36 meses"
+      {
+        "score": 0,
+        "answer": "Até 12 meses"
+      },
+      {
+        "score": 0,
+        "answer": "13 a 18 meses"
+      },
+      {
+        "score": 0,
+        "answer": "19 a 24 meses"
+      },
+      {
+        "score": 0,
+        "answer": "25 a 36 meses"
+      },
+      {
+        "score": 0,
+        "answer": "mais de 36 meses"
+      }
     ]
   },
   {
     "question": "Sua experiência com investimentos pode ser descrita como alguém que",
     "options": [
-      "Está investindo pela primeira vez",
-      "Tem pouca experiência em investimentos, e que somente utiliza a poupança como reserva",
-      "Possui alguma experiência e já investiu em alguns ativos como fundos, CDBs ou Tesouro direto",
-      "Possui ampla experiência e conhece bem a respeito de ações e fundos multimercados"
+      {
+        "score": 0,
+        "answer": "Está investindo pela primeira vez"
+      },
+      {
+        "score": 0,
+        "answer": "Tem pouca experiência em investimentos, e que somente utiliza a poupança como reserva"
+      },
+      {
+        "score": 0,
+        "answer": "Possui alguma experiência e já investiu em alguns ativos como fundos, CDBs ou Tesouro direto"
+      },
+      {
+        "score": 0,
+        "answer": "Possui ampla experiência e conhece bem a respeito de ações e fundos multimercados"
+      }
     ]
   },
   {
     "question": "Nos investimentos, o que mais importa pra você?",
     "options": [
-      "Maximizar o potencial do ganho",
-      "Minimizar o risco de perdas",
-      "Um equilíbrio entre ambos"
+      {
+        "score": 0,
+        "answer": "Maximizar o potencial do ganho"
+      },
+      {
+        "score": 0,
+        "answer": "Minimizar o risco de perdas"
+      },
+      {
+        "score": 0,
+        "answer": "Um equilíbrio entre ambos"
+      }
     ]
   },
   {
     "question": "Ao aplicar R$ 10 mil pelo prazo de um ano, você:",
     "options": [
-      "Prefere ter a certeza de resgatar no final do prazo R$ 11 mil",
-      "Aceitaria investir com 50% de probabilidade de lucrar e resgatar R$ 16 mil e 50% de probabilidade de perder e resgatar R$ 9 mil",
-      "Aceitaria investir com 50% de probabilidade de lucrar e resgatar R$ 20 mil e 50% de probabilidade de perder e resgatar R$ 7 mil"
+      {
+        "score": 0,
+        "answer": "Prefere ter a certeza de resgatar no final do prazo R$ 11 mil"
+      },
+      {
+        "score": 0,
+        "answer": "Aceitaria investir com 50% de probabilidade de lucrar e resgatar R$ 16 mil e 50% de probabilidade de perder e resgatar R$ 9 mil"
+      },
+      {
+        "score": 0,
+        "answer": "Aceitaria investir com 50% de probabilidade de lucrar e resgatar R$ 20 mil e 50% de probabilidade de perder e resgatar R$ 7 mil"
+      }
     ]
   },
   {
     "question": "Se passados 12 meses seus investimentos apresentassem um desvalorização de 30%, você",
     "options": [
-      "Resgataria todos os meus investimentos",
-      "Manteria meus investimentos",
-      "Manteria ou aumentaria meus investimentos, caso acreditasse que a decisão inicial foi correta"
+      {
+        "score": 0,
+        "answer": "Resgataria todos os meus investimentos"
+      },
+      {
+        "score": 0,
+        "answer": "Manteria meus investimentos"
+      },
+      {
+        "score": 0,
+        "answer": "Manteria ou aumentaria meus investimentos, caso acreditasse que a decisão inicial foi correta"
+      }
     ]
   }
 ]
