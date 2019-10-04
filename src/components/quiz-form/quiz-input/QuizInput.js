@@ -28,7 +28,11 @@ function SubmitButton() {
   );
 }
 
-export default function QuizInput({ previousStage, nextStage }) {
+export default function QuizInput({
+  answer,
+  previousStage,
+  nextStage,
+}) {
   const input = React.useRef(null);
 
   const maskMoney = createNumberMask({
@@ -42,6 +46,7 @@ export default function QuizInput({ previousStage, nextStage }) {
   });
 
   const onChange = useInputMask({
+    initialValue: answer || '',
     input,
     onChange: e => e.target.value,
     mask: value => {
@@ -70,8 +75,7 @@ export default function QuizInput({ previousStage, nextStage }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    // console.log('input.current.value', input.current.value);
-    nextStage();
+    nextStage(input.current.value);
   }
 
   return (
@@ -111,7 +115,12 @@ export default function QuizInput({ previousStage, nextStage }) {
   );
 }
 
+QuizInput.defaultProps = {
+  answer: null,
+};
+
 QuizInput.propTypes = {
   previousStage: PropTypes.func.isRequired,
   nextStage: PropTypes.func.isRequired,
+  answer: PropTypes.string,
 };

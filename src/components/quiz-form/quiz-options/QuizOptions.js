@@ -9,6 +9,7 @@ export default function QuizOptions({
   stage,
   previousStage,
   nextStage,
+  quizAnswers,
 }) {
   const radio = useRadioState();
   const { options } = questions[stage];
@@ -30,6 +31,7 @@ export default function QuizOptions({
             <Radio
               value={answer}
               className="form-radio h-6 w-6 mr-5"
+              checked={answer === quizAnswers[stage]}
               {...radio}
             />
             {answer}
@@ -54,4 +56,5 @@ QuizOptions.propTypes = {
   stage: PropTypes.number.isRequired,
   previousStage: PropTypes.func.isRequired,
   nextStage: PropTypes.func.isRequired,
+  quizAnswers: PropTypes.array.isRequired,
 };

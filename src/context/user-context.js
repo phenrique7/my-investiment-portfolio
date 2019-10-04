@@ -13,6 +13,7 @@ function UserProvider({ children }) {
     email: '',
     name: '',
     quizStage: 0,
+    finalScore: 0,
   });
 
   React.useEffect(() => {

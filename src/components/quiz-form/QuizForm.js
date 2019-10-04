@@ -2,19 +2,30 @@ import React from 'react';
 import Router from 'next/router';
 import { Box } from 'reakit';
 import QuizInput from 'src/components/quiz-form/quiz-input/QuizInput';
-import QuizOptions from 'src/components/quiz-form/QuizOptions';
+import QuizOptions from 'src/components/quiz-form/quiz-options/QuizOptions';
 import { useUser } from 'src/context/user-context';
-import { setStorage } from 'src/utils/storage';
-import { LS_USER_DATA_KEY } from 'src/utils/constants';
+import { setStorage, getStorage } from 'src/utils/storage';
+import {
+  LS_USER_DATA_KEY,
+  MAX_QUESTIONS,
+  FIRST_QUESTION,
+} from 'src/utils/constants';
 import questions from 'static/questions.json';
 
 export default function QuizForm() {
-  const { user } = useUser();
+  const { user, setUser } = useUser();
   const [stage, setStage] = React.useState(0);
+  const [quiz, setQuiz] = React.useState({
+    score: 0,
+    answers: new Array(MAX_QUESTIONS).fill(null),
+  });
   const { quizStage } = user;
 
   React.useEffect(() => {
     if (quizStage > 0) {
+      const userDataStorage = getStorage(LS_USER_DATA_KEY);
+      const userData = JSON.parse(userDataStorage);
+      setQuiz(userData.quiz);
       setStage(quizStage);
     }
   }, [quizStage]);
@@ -36,7 +47,29 @@ export default function QuizForm() {
     });
   }
 
-  function nextStage() {
+  function nextStage(answer, score) {
+    setQuiz(prevState => {
+      const newAnswers = prevState.answers.map((value, index) =>
+        index === stage ? answer : value,
+      );
+
+      const newState = {
+        score: prevState.score + score,
+        answers: newAnswers,
+      };
+
+      setStorage(
+        LS_USER_DATA_KEY,
+        {
+          ...user,
+          quiz: newState,
+        },
+        true,
+      );
+
+      return newState;
+    });
+
     setStage(prevState => {
       const newState = prevState + 1;
 
@@ -53,7 +86,8 @@ export default function QuizForm() {
     });
   }
 
-  if (stage === 7) {
+  if (stage === MAX_QUESTIONS) {
+    setUser(prevState => ({ ...prevState, finalScore: quiz.score }));
     Router.push('/resultado');
     return null;
   }
@@ -70,8 +104,9 @@ export default function QuizForm() {
                 {question}
               </p>
             </Box>
-            {stage === 0 ? (
+            {stage === FIRST_QUESTION ? (
               <QuizInput
+                answer={quiz[FIRST_QUESTION]}
                 previousStage={previousStage}
                 nextStage={nextStage}
               />
@@ -80,6 +115,7 @@ export default function QuizForm() {
                 stage={stage}
                 previousStage={previousStage}
                 nextStage={nextStage}
+                quiz={quiz}
               />
             )}
           </Box>
