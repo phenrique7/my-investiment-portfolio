@@ -71,23 +71,6 @@
     ]
   },
   {
-    "question": "Nos investimentos, o que mais importa pra você?",
-    "options": [
-      {
-        "score": 0,
-        "answer": "Maximizar o potencial do ganho"
-      },
-      {
-        "score": 0,
-        "answer": "Minimizar o risco de perdas"
-      },
-      {
-        "score": 0,
-        "answer": "Um equilíbrio entre ambos"
-      }
-    ]
-  },
-  {
     "question": "Ao aplicar R$ 10 mil pelo prazo de um ano, você:",
     "options": [
       {

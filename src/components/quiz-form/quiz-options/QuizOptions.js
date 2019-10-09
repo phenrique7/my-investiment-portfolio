@@ -1,3 +1,4 @@
+import React from 'react';
 import PropTypes from 'prop-types';
 import { useRadioState, Radio, RadioGroup } from 'reakit/Radio';
 import Icon from 'src/components/icon/Icon';
@@ -11,18 +12,23 @@ export default function QuizOptions({
   nextStage,
   quizAnswers,
 }) {
-  const radio = useRadioState();
+  const radio = useRadioState({ state: quizAnswers[stage] });
   const { options } = questions[stage];
 
   function handleSubmit(event) {
     event.preventDefault();
-    nextStage();
+
+    const { score } = options.find(
+      ({ answer }) => radio.state === answer,
+    );
+
+    nextStage(radio.state, score);
   }
 
   return (
     <form className="m-auto px-6 py-4" onSubmit={handleSubmit}>
       <RadioGroup
-        aria-label="fruits"
+        aria-label="respostas"
         className="flex flex-col text-gray-700"
         {...radio}
       >
@@ -31,7 +37,6 @@ export default function QuizOptions({
             <Radio
               value={answer}
               className="form-radio h-6 w-6 mr-5"
-              checked={answer === quizAnswers[stage]}
               {...radio}
             />
             {answer}

@@ -8,6 +8,7 @@ storiesOf('Quiz Options', module).add('default', () => (
       stage={1}
       previousStage={() => {}}
       nextStage={() => {}}
+      quizAnswers={['', '']}
     />
   </div>
 ));
