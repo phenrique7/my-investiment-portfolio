@@ -23,7 +23,7 @@ export default function Home() {
         className="w-full"
         alt="Home attachment"
       />
-      <Box className="flex justify-center">
+      <Box className="flex flex-col justify-center items-center">
         <Box className="w-64 flex flex-col mt-5">
           <Box className="ml-auto mr-auto relative -top-4">
             <img
@@ -42,6 +42,12 @@ export default function Home() {
               </Button>
             </Link>
           </Box>
+        </Box>
+        <Box className="mt-12 max-w-md">
+          <p className="text-center text-gray-700">
+            Elabore sua própria carteira de investimentos de forma
+            rápida e simples!
+          </p>
         </Box>
       </Box>
     </div>
