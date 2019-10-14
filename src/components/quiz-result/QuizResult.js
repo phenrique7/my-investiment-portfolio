@@ -7,6 +7,13 @@ export default function Result() {
   return (
     <Box className="flex justify-center">
       <Box>
+        <Box>
+          <img
+            className="block"
+            alt="Perfil do investidor"
+            src="/static/images/investor-profile.png"
+          />
+        </Box>
         <div className="font-bold text-xl text-center mb-6">
           <p className="text-gray-900">
             Seu perfil de investidor é Moderado

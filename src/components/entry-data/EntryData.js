@@ -30,11 +30,11 @@ export default function EntryData() {
       const errors = {};
 
       if (!values.name) {
-        errors.name = 'Não esqueça de inserir seu nome';
+        errors.name = 'Nome não pode ser vazio.';
       }
 
       if (!values.email) {
-        errors.email = 'Não esqueça de inserir seu e-mail';
+        errors.email = 'E-mail não pode ser vazio.';
       }
 
       if (Object.keys(errors).length) {
