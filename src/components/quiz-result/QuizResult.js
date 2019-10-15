@@ -6,7 +6,7 @@ import { VictoryPie, VictoryLegend } from 'victory';
 export default function Result() {
   return (
     <Box className="flex justify-center">
-      <Box>
+      <Box className="px-5">
         <Box>
           <img
             className="block"
@@ -14,16 +14,16 @@ export default function Result() {
             src="/static/images/investor-profile.png"
           />
         </Box>
-        <div className="font-bold text-xl text-center mb-6">
+        <Box className="font-bold text-xl text-center mb-6">
           <p className="text-gray-900">
             Seu perfil de investidor é Moderado
           </p>
-        </div>
-        <div className="max-w-4xl rounded-lg overflow-hidden border bg-gray-100">
-          <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2 text-gray-900">
+        </Box>
+        <Box className="max-w-4xl rounded-lg overflow-hidden border bg-gray-100">
+          <Box className="px-6 py-4">
+            <Box className="font-bold text-xl mb-2 text-gray-900">
               Descrição do seu perfil
-            </div>
+            </Box>
             <p className="text-gray-700 text-base">
               Para o investidor de perfil moderado, a segurança é
               importante, mas ele busca retornos maiores, aceitando,
@@ -32,13 +32,13 @@ export default function Result() {
               restante em aplicações mais estáveis. Além disso, ele
               preza pela busca de ganhos no médio e longo prazo.
             </p>
-          </div>
-        </div>
-        <div className="max-w-4xl rounded-lg overflow-hidden border mt-4 bg-gray-100">
-          <div className="px-6 py-4">
-            <div className="font-bold text-xl mb-2 text-gray-900">
+          </Box>
+        </Box>
+        <Box className="max-w-4xl rounded-lg overflow-hidden border mt-4 bg-gray-100">
+          <Box className="px-6 py-4">
+            <Box className="font-bold text-xl mb-2 text-gray-900">
               Carteira de investimentos sugerida
-            </div>
+            </Box>
             <svg viewBox="0 0 600 600">
               <VictoryPie
                 standalone={false}
@@ -85,11 +85,11 @@ export default function Result() {
                 ]}
               />
             </svg>
-          </div>
-        </div>
-        <div className="flex justify-center mt-10">
+          </Box>
+        </Box>
+        <Box className="flex justify-center mt-10">
           <Button type="submit">Refazer o questionário</Button>
-        </div>
+        </Box>
       </Box>
     </Box>
   );

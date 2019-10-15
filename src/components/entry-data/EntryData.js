@@ -73,10 +73,11 @@ export default function EntryData() {
                 alt="👋"
                 src="https://s.w.org/images/core/emoji/11/svg/1f44b.svg"
               />
-              Algumas perguntas serão feitas para que seja possível
-              identificar qual é o seu perfil de investidor e, assim,
-              poder sugerir melhor os investimentos que se adequam ao
-              seu perfil.
+              Algumas perguntas serão feitas a fim de que seja
+              possível identificar qual é o seu perfil de investidor
+              e, assim, poder sugerir melhor a alocação dos seus
+              recursos e os investimentos que se adequam ao seu
+              perfil.
             </p>
             <Box className="mt-10 flex justify-center">
               <Link href="/questionario">

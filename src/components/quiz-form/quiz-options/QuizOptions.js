@@ -4,7 +4,7 @@ import { useRadioState, Radio, RadioGroup } from 'reakit/Radio';
 import Icon from 'src/components/icon/Icon';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import { Button } from 'src/components/button/Button';
-import questions from 'static/questions.json';
+import questions from 'public/static/questions.json';
 
 export default function QuizOptions({
   stage,

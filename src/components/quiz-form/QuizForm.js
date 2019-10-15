@@ -5,12 +5,12 @@ import QuizInput from 'src/components/quiz-form/quiz-input/QuizInput';
 import QuizOptions from 'src/components/quiz-form/quiz-options/QuizOptions';
 import { useUser } from 'src/context/user-context';
 import { setStorage, getStorage } from 'src/utils/storage';
+import questions from 'public/static/questions.json';
 import {
   LS_USER_DATA_KEY,
   MAX_QUESTIONS,
   FIRST_QUESTION,
 } from 'src/utils/constants';
-import questions from 'static/questions.json';
 
 export default function QuizForm() {
   const { user, setUser } = useUser();
@@ -48,27 +48,16 @@ export default function QuizForm() {
   }
 
   function nextStage(answer, score) {
-    setQuiz(prevState => {
-      const newAnswers = prevState.answers.map((value, index) =>
-        index === stage ? answer : value,
-      );
+    const newAnswers = quiz.answers.map((value, index) =>
+      index === stage ? answer : value,
+    );
 
-      const newState = {
-        score: prevState.score + score,
-        answers: newAnswers,
-      };
+    const newQuizState = {
+      score: quiz.score + score,
+      answers: newAnswers,
+    };
 
-      setStorage(
-        LS_USER_DATA_KEY,
-        {
-          ...user,
-          quiz: newState,
-        },
-        true,
-      );
-
-      return newState;
-    });
+    setQuiz(newQuizState);
 
     setStage(prevState => {
       const newState = prevState + 1;
@@ -77,6 +66,7 @@ export default function QuizForm() {
         LS_USER_DATA_KEY,
         {
           ...user,
+          quiz: newQuizState,
           quizStage: newState,
         },
         true,
@@ -106,7 +96,7 @@ export default function QuizForm() {
             </Box>
             {stage === FIRST_QUESTION ? (
               <QuizInput
-                answer={quiz[FIRST_QUESTION]}
+                answer={quiz.answers[FIRST_QUESTION]}
                 previousStage={previousStage}
                 nextStage={nextStage}
               />
@@ -115,7 +105,7 @@ export default function QuizForm() {
                 stage={stage}
                 previousStage={previousStage}
                 nextStage={nextStage}
-                quiz={quiz}
+                quizAnswers={quiz.answers}
               />
             )}
           </Box>
