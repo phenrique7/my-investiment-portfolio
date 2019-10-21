@@ -29,23 +29,15 @@
     "options": [
       {
         "score": 0,
-        "answer": "Até 12 meses"
+        "answer": "Até 2 anos"
       },
       {
         "score": 0,
-        "answer": "13 a 18 meses"
+        "answer": "2 a 5 anos"
       },
       {
         "score": 0,
-        "answer": "19 a 24 meses"
-      },
-      {
-        "score": 0,
-        "answer": "25 a 36 meses"
-      },
-      {
-        "score": 0,
-        "answer": "mais de 36 meses"
+        "answer": "mais de 5 anos"
       }
     ]
   },

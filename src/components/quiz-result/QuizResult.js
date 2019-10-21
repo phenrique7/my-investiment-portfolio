@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box } from 'reakit';
 import { Button } from 'src/components/button/Button';
-import { VictoryPie, VictoryLegend } from 'victory';
+import ResultChart from 'src/components/result-chart/ResultChart';
 
 export default function Result() {
   return (
@@ -39,55 +39,12 @@ export default function Result() {
             <Box className="font-bold text-xl mb-2 text-gray-900">
               Carteira de investimentos sugerida
             </Box>
-            <svg viewBox="0 0 600 600">
-              <VictoryPie
-                standalone={false}
-                origin={{ x: 310, y: 220 }}
-                colorScale={[
-                  'tomato',
-                  'orange',
-                  'gold',
-                  'cyan',
-                  'navy',
-                ]}
-                data={[
-                  { x: '25 %', y: 25 },
-                  { x: '30 %', y: 30 },
-                  { x: '25 %', y: 25 },
-                  { x: '15 %', y: 15 },
-                  { x: '5 %', y: 5 },
-                ]}
-              />
-              <VictoryLegend
-                standalone={false}
-                x={170}
-                y={430}
-                orientation="vertical"
-                gutter={100}
-                style={{ border: { stroke: 'black' } }}
-                data={[
-                  {
-                    name: 'Previdência privada',
-                    symbol: { fill: 'tomato' },
-                  },
-                  {
-                    name: 'Renda fixa',
-                    symbol: { fill: 'tomato' },
-                  },
-                  {
-                    name: 'Renda variável',
-                    symbol: { fill: 'tomato' },
-                  },
-                  {
-                    name: 'Fundos de investimentos',
-                    symbol: { fill: 'orange' },
-                  },
-                ]}
-              />
-            </svg>
+            <Box>
+              <ResultChart />
+            </Box>
           </Box>
         </Box>
-        <Box className="flex justify-center mt-10">
+        <Box className="flex justify-center mt-10 mb-5">
           <Button type="submit">Refazer o questionário</Button>
         </Box>
       </Box>
