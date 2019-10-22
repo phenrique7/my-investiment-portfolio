@@ -91,9 +91,8 @@ export default function EntryData() {
               <Box className="overflow-hidden">
                 <Box className="px-6 py-4">
                   <p className="text-gray-700 text-xl text-center">
-                    Antes de começar a análise do seu perfil de
-                    investidor, preciso saber duas informações sobre
-                    você:
+                    Antes de começarmos, preciso saber duas
+                    informações sobre você:
                   </p>
                 </Box>
                 <Form className="w-full px-6 py-4" {...form}>

@@ -43,10 +43,10 @@ export default function Home() {
             </Link>
           </Box>
         </Box>
-        <Box className="mt-12 max-w-md">
+        <Box className="mt-8 w-84">
           <p className="text-center text-gray-700">
-            Elabore sua própria carteira de investimentos de forma
-            rápida e simples!
+            Elabore sua carteira de investimentos de forma rápida e
+            simples!
           </p>
         </Box>
       </Box>

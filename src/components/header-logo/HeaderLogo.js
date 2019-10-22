@@ -3,7 +3,7 @@ import Link from 'next/link';
 
 export default function HeaderLogo() {
   return (
-    <Box className="ml-auto mr-auto absolute p-2">
+    <Box className="ml-auto mr-auto fixed p-2">
       <Link href="/">
         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
         <a>
