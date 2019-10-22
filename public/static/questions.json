@@ -1,0 +1,99 @@
+[
+  {
+    "question": "Quanto você tem para começar a investir?",
+    "options": []
+  },
+  {
+    "question": "Você tem idade",
+    "options": [
+      {
+        "score": 0,
+        "answer": "de até 25 anos"
+      },
+      {
+        "score": 0,
+        "answer": "entre 26 a 35 anos"
+      },
+      {
+        "score": 0,
+        "answer": "entre 36 a 45 anos"
+      },
+      {
+        "score": 0,
+        "answer": "entre 46 a 55 anos"
+      }
+    ]
+  },
+  {
+    "question": "Você pretende investir seu dinheiro por um período de tempo de",
+    "options": [
+      {
+        "score": 0,
+        "answer": "Até 2 anos"
+      },
+      {
+        "score": 0,
+        "answer": "2 a 5 anos"
+      },
+      {
+        "score": 0,
+        "answer": "mais de 5 anos"
+      }
+    ]
+  },
+  {
+    "question": "Sua experiência com investimentos pode ser descrita como alguém que",
+    "options": [
+      {
+        "score": 0,
+        "answer": "Está investindo pela primeira vez"
+      },
+      {
+        "score": 0,
+        "answer": "Tem pouca experiência em investimentos, e que somente utiliza a poupança como reserva"
+      },
+      {
+        "score": 0,
+        "answer": "Possui alguma experiência e já investiu em alguns ativos como fundos, CDBs ou Tesouro direto"
+      },
+      {
+        "score": 0,
+        "answer": "Possui ampla experiência e conhece bem a respeito de ações e fundos multimercados"
+      }
+    ]
+  },
+  {
+    "question": "Ao aplicar R$ 10 mil pelo prazo de um ano, você:",
+    "options": [
+      {
+        "score": 0,
+        "answer": "Prefere ter a certeza de resgatar no final do prazo R$ 11 mil"
+      },
+      {
+        "score": 0,
+        "answer": "Aceitaria investir com 50% de probabilidade de lucrar e resgatar R$ 16 mil e 50% de probabilidade de perder e resgatar R$ 9 mil"
+      },
+      {
+        "score": 0,
+        "answer": "Aceitaria investir com 50% de probabilidade de lucrar e resgatar R$ 20 mil e 50% de probabilidade de perder e resgatar R$ 7 mil"
+      }
+    ]
+  },
+  {
+    "question": "Se passados 12 meses seus investimentos apresentassem um desvalorização de 30%, você",
+    "options": [
+      {
+        "score": 0,
+        "answer": "Resgataria todos os meus investimentos"
+      },
+      {
+        "score": 0,
+        "answer": "Manteria meus investimentos"
+      },
+      {
+        "score": 0,
+        "answer": "Manteria ou aumentaria meus investimentos, caso acreditasse que a decisão inicial foi correta"
+      }
+    ]
+  }
+]
