@@ -1,9 +1,9 @@
 import React from 'react';
 import Router from 'next/router';
+import fetch from 'isomorphic-unfetch';
 import { Box } from 'reakit';
 import { Button } from 'src/components/button/Button';
 import ResultChart from 'src/components/result-chart/ResultChart';
-import { clearStorage } from 'src/utils/storage';
 
 const data = [
   {
@@ -39,8 +39,33 @@ const data = [
 ];
 
 export default function Result() {
+  const [emailSent, setEmailSent] = React.useState(false);
+
+  React.useEffect(() => {
+    async function triggerEmailSending() {
+      try {
+        const res = await fetch('http://localhost/send-email', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ email: 'paulo.henrique@email.com' }),
+        });
+        const json = await res.json();
+        console.log('json', json);
+      } catch (error) {
+        console.log('An error occured while sending e-mail');
+      } finally {
+        setEmailSent(true);
+      }
+    }
+
+    if (!emailSent) {
+      triggerEmailSending();
+    }
+  }, [emailSent]);
+
   function retakeQuiz() {
-    clearStorage();
     Router.push('/dados-iniciais');
   }
 

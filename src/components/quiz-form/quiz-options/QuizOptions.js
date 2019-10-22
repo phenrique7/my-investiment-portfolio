@@ -43,7 +43,7 @@ export default function QuizOptions({
           </label>
         ))}
       </RadioGroup>
-      <div className="flex justify-between mt-10">
+      <div className="flex justify-between items-center mt-10">
         <Button onClick={previousStage} kind="outlined">
           <Icon reactIcon={MdArrowBack} className="mr-2" />
           Voltar

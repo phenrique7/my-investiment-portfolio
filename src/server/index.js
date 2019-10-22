@@ -17,12 +17,16 @@ nextApp.prepare().then(() => {
 
   app.post('/send-email', async (req, res) => {
     try {
-      await Mail.sendMail({
-        from: '"Paulo Henrique" <paulo.henrique@email.com>',
-        to: 'paulo.henrique@email.com',
-        subject: 'Resultado do seu perfil de investidor',
-        html: '<p>Teste</>',
-      });
+      if (dev) {
+        console.log('res.body', res.body);
+
+        await Mail.sendMail({
+          from: '"Paulo Henrique" <paulo.henrique@email.com>',
+          to: res.body.email,
+          subject: 'Resultado do seu perfil de investidor',
+          html: '<p>Teste</p>',
+        });
+      }
 
       return res
         .status(200)

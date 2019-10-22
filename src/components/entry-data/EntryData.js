@@ -2,6 +2,8 @@ import React from 'react';
 import Link from 'next/link';
 import { Box } from 'reakit';
 import { LinkButton, Button } from 'src/components/button/Button';
+import { MdArrowBack, MdArrowForward } from 'react-icons/md';
+import Icon from 'src/components/icon/Icon';
 import useMedia from 'src/hooks/useMedia';
 import { isEmptyObject } from 'src/helpers';
 import { useUser } from 'src/context/user-context';
@@ -20,6 +22,7 @@ export default function EntryData() {
   const {
     user: { name },
     setUser,
+    resetUser,
   } = useUser();
   const form = useFormState({
     values: {
@@ -79,9 +82,16 @@ export default function EntryData() {
               recursos e os investimentos que se adequam ao seu
               perfil.
             </p>
-            <Box className="mt-10 flex justify-center">
+            <Box className="mt-10 flex justify-between items-center">
+              <Button onClick={resetUser} kind="outlined">
+                <Icon reactIcon={MdArrowBack} className="mr-2" />
+                Voltar
+              </Button>
               <Link href="/questionario">
-                <LinkButton>Continuar</LinkButton>
+                <LinkButton>
+                  Prosseguir
+                  <Icon reactIcon={MdArrowForward} className="ml-2" />
+                </LinkButton>
               </Link>
             </Box>
           </Box>

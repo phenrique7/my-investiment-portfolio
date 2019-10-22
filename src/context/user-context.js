@@ -9,15 +9,19 @@ import Loader from 'react-loader-spinner';
 
 const UserContext = React.createContext();
 
-function UserProvider({ children }) {
-  const { route } = useRouter();
-  const [loading, setLoading] = React.useState(true);
-  const [user, setUser] = React.useState({
+function initialState() {
+  return {
     email: '',
     name: '',
     quizStage: 0,
     finalScore: 0,
-  });
+  };
+}
+
+function UserProvider({ children }) {
+  const { route } = useRouter();
+  const [loading, setLoading] = React.useState(true);
+  const [user, setUser] = React.useState(() => initialState());
 
   React.useEffect(() => {
     const userDataStorage = getStorage(LS_USER_DATA_KEY);
@@ -37,11 +41,16 @@ function UserProvider({ children }) {
     setLoading(false);
   }, [route]);
 
+  function resetUser() {
+    setUser(() => initialState());
+  }
+
   return (
     <UserContext.Provider
       value={{
         user,
         setUser,
+        resetUser,
       }}
     >
       {loading ? (
