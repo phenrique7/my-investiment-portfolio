@@ -45,8 +45,8 @@ export default function Home() {
         </Box>
         <Box className="mt-8 w-84">
           <p className="text-center text-gray-700">
-            Elabore sua carteira de investimentos de forma rápida e
-            simples!
+            Elabore sua carteira de investimentos alinhada aos seus
+            objetivos de forma rápida e simples!
           </p>
         </Box>
       </Box>
