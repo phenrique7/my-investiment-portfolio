@@ -18,13 +18,15 @@ nextApp.prepare().then(() => {
   app.post('/send-email', async (req, res) => {
     try {
       if (dev) {
-        console.log('res.body', res.body);
+        console.log('req.body', req.body);
+        const { name, email } = req.body;
 
         await Mail.sendMail({
           from: '"Paulo Henrique" <paulo.henrique@email.com>',
-          to: res.body.email,
+          to: email,
           subject: 'Resultado do seu perfil de investidor',
-          html: '<p>Outro teste</p>',
+          template: 'quiz-result',
+          context: { name, investorProfile: 'Moderado' },
         });
       }
 
