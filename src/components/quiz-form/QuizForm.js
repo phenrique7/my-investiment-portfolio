@@ -5,6 +5,7 @@ import QuizInput from 'src/components/quiz-form/quiz-input/QuizInput';
 import QuizOptions from 'src/components/quiz-form/quiz-options/QuizOptions';
 import { useUser } from 'src/context/user-context';
 import { setStorage, getStorage } from 'src/utils/storage';
+import { getInitialInvestmentValueScore } from 'src/helpers';
 import questions from 'public/static/questions.json';
 import {
   LS_USER_DATA_KEY,
@@ -13,24 +14,54 @@ import {
 } from 'src/utils/constants';
 
 export default function QuizForm() {
-  const { user, setUser } = useUser();
+  const { user } = useUser();
   const [stage, setStage] = React.useState(0);
-  const [quiz, setQuiz] = React.useState({
-    score: 0,
-    answers: new Array(MAX_QUESTIONS).fill(null),
-  });
-  const { quizStage } = user;
+  const [quizAnswers, setQuizAnswers] = React.useState(() =>
+    new Array(MAX_QUESTIONS).fill(null),
+  );
 
   React.useEffect(() => {
-    if (quizStage > 0) {
+    if (user.quizStage > 0) {
       const userDataStorage = getStorage(LS_USER_DATA_KEY);
       const userData = JSON.parse(userDataStorage);
-      setQuiz(userData.quiz);
-      setStage(quizStage);
+      setQuizAnswers(userData.quizAnswers);
+      setStage(user.quizStage);
     }
-  }, [quizStage]);
+  }, [user.quizStage]);
+
+  function calculateQuizScore() {
+    return questions.reduce((accumulator, question, index) => {
+      if (index) {
+        const { score } = question.options.find(
+          ({ answer }) => quizAnswers[index] === answer,
+        );
+        return accumulator + score;
+      }
+      return getInitialInvestmentValueScore(quizAnswers[index]);
+    }, 0);
+  }
+
+  function goToResult(quizScore) {
+    Router.push({
+      pathname: '/resultado',
+      query: { quizScore },
+    });
+  }
+
+  function getNewAnswers(action, answer) {
+    const newAnswer = action === 'prev' ? null : answer;
+    const currentAnswers = quizAnswers.map((value, index) =>
+      index === stage ? newAnswer : value,
+    );
+
+    setQuizAnswers(currentAnswers);
+
+    return currentAnswers;
+  }
 
   function previousStage() {
+    const newAnswers = getNewAnswers('prev');
+
     setStage(prevState => {
       const newState = prevState - 1;
 
@@ -38,6 +69,7 @@ export default function QuizForm() {
         LS_USER_DATA_KEY,
         {
           ...user,
+          quizAnswers: newAnswers,
           quizStage: newState,
         },
         true,
@@ -47,17 +79,8 @@ export default function QuizForm() {
     });
   }
 
-  function nextStage(answer, score) {
-    const newAnswers = quiz.answers.map((value, index) =>
-      index === stage ? answer : value,
-    );
-
-    const newQuizState = {
-      score: quiz.score + score,
-      answers: newAnswers,
-    };
-
-    setQuiz(newQuizState);
+  function nextStage(answer) {
+    const newAnswers = getNewAnswers('next', answer);
 
     setStage(prevState => {
       const newState = prevState + 1;
@@ -66,7 +89,7 @@ export default function QuizForm() {
         LS_USER_DATA_KEY,
         {
           ...user,
-          quiz: newQuizState,
+          quizAnswers: newAnswers,
           quizStage: newState,
         },
         true,
@@ -77,8 +100,8 @@ export default function QuizForm() {
   }
 
   if (stage === MAX_QUESTIONS) {
-    setUser(prevState => ({ ...prevState, finalScore: quiz.score }));
-    Router.push('/resultado');
+    const score = calculateQuizScore();
+    goToResult(score);
     return null;
   }
 
@@ -96,7 +119,7 @@ export default function QuizForm() {
             </Box>
             {stage === FIRST_QUESTION ? (
               <QuizInput
-                answer={quiz.answers[FIRST_QUESTION]}
+                answer={quizAnswers[FIRST_QUESTION]}
                 previousStage={previousStage}
                 nextStage={nextStage}
               />
@@ -105,7 +128,7 @@ export default function QuizForm() {
                 stage={stage}
                 previousStage={previousStage}
                 nextStage={nextStage}
-                quizAnswers={quiz.answers}
+                quizAnswers={quizAnswers}
               />
             )}
           </Box>

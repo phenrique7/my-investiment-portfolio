@@ -24,7 +24,7 @@ nextApp.prepare().then(() => {
           from: '"Paulo Henrique" <paulo.henrique@email.com>',
           to: res.body.email,
           subject: 'Resultado do seu perfil de investidor',
-          html: '<p>Teste</p>',
+          html: '<p>Outro teste</p>',
         });
       }
 

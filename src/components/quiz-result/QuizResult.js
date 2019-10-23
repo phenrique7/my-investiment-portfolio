@@ -1,9 +1,10 @@
 import React from 'react';
-import Router from 'next/router';
+import Router, { useRouter } from 'next/router';
 import fetch from 'isomorphic-unfetch';
 import { Box } from 'reakit';
 import { Button } from 'src/components/button/Button';
 import ResultChart from 'src/components/result-chart/ResultChart';
+import { useUser } from 'src/context/user-context';
 
 const data = [
   {
@@ -40,6 +41,12 @@ const data = [
 
 export default function Result() {
   const [emailSent, setEmailSent] = React.useState(false);
+  const {
+    user: { name, email },
+  } = useUser();
+  const {
+    query: { quizScore },
+  } = useRouter();
 
   React.useEffect(() => {
     async function triggerEmailSending() {
@@ -49,7 +56,7 @@ export default function Result() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ email: 'paulo.henrique@email.com' }),
+          body: JSON.stringify({ name, email, quizScore }),
         });
         const json = await res.json();
         console.log('json', json);
@@ -63,7 +70,7 @@ export default function Result() {
     if (!emailSent) {
       triggerEmailSending();
     }
-  }, [emailSent]);
+  }, [emailSent, email, name, quizScore]);
 
   function retakeQuiz() {
     Router.push('/dados-iniciais');
@@ -79,7 +86,7 @@ export default function Result() {
             src="/static/images/investor-profile.png"
           />
         </Box>
-        <Box className="font-bold text-xl text-center mb-8">
+        <Box className="font-bold text-xl text-center mb-10">
           <p className="text-gray-900">
             Seu perfil de investidor é Moderado
           </p>

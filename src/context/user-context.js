@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import Router, { useRouter } from 'next/router';
 import { Box } from 'reakit';
 import { isEmptyObject } from 'src/helpers';
-import { getStorage } from 'src/utils/storage';
+import { getStorage, clearStorage } from 'src/utils/storage';
 import { LS_USER_DATA_KEY } from 'src/utils/constants';
 import Loader from 'react-loader-spinner';
 
@@ -14,7 +14,6 @@ function initialState() {
     email: '',
     name: '',
     quizStage: 0,
-    finalScore: 0,
   };
 }
 
@@ -42,6 +41,7 @@ function UserProvider({ children }) {
   }, [route]);
 
   function resetUser() {
+    clearStorage();
     setUser(() => initialState());
   }
 

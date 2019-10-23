@@ -17,12 +17,7 @@ export default function QuizOptions({
 
   function handleSubmit(event) {
     event.preventDefault();
-
-    const { score } = options.find(
-      ({ answer }) => radio.state === answer,
-    );
-
-    nextStage(radio.state, score);
+    nextStage(radio.state);
   }
 
   return (

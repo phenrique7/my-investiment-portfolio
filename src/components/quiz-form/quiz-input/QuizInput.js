@@ -75,7 +75,7 @@ export default function QuizInput({
 
   function handleSubmit(event) {
     event.preventDefault();
-    nextStage(input.current.value, 0);
+    nextStage(input.current.value);
   }
 
   return (
