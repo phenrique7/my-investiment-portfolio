@@ -51,7 +51,7 @@ export default function Result() {
   React.useEffect(() => {
     async function triggerEmailSending() {
       try {
-        const res = await fetch('http://localhost/send-email', {
+        const res = await fetch('http://localhost:3000/send-email', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
@@ -61,7 +61,7 @@ export default function Result() {
         const json = await res.json();
         console.log('json', json);
       } catch (error) {
-        console.log('An error occured while sending e-mail');
+        console.log('An error occured while sending e-mail', error);
       } finally {
         setEmailSent(true);
       }

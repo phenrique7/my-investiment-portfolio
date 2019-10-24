@@ -8,7 +8,19 @@ import Icon from 'src/components/icon/Icon';
 import useInputMutationObserver from 'src/hooks/useInputMutationObserver';
 
 function FormMessage() {
-  const { emptyTextField, blurEvent } = useInputMutationObserver();
+  const {
+    emptyTextField,
+    blurEvent,
+    inputNumber,
+  } = useInputMutationObserver();
+
+  if (inputNumber === 0 && blurEvent) {
+    return (
+      <p className="text-red-500 text-xs">
+        Valor inicial tem que ser maior que R$ 0,00.
+      </p>
+    );
+  }
 
   return emptyTextField && blurEvent ? (
     <p className="text-red-500 text-xs">
@@ -18,10 +30,13 @@ function FormMessage() {
 }
 
 function SubmitButton() {
-  const { emptyTextField } = useInputMutationObserver();
+  const { emptyTextField, inputNumber } = useInputMutationObserver();
 
   return (
-    <Button type="submit" disabled={emptyTextField}>
+    <Button
+      type="submit"
+      disabled={emptyTextField || inputNumber === 0}
+    >
       Próximo
       <Icon reactIcon={MdArrowForward} className="ml-2" />
     </Button>
