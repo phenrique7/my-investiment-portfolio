@@ -5,6 +5,10 @@ import { Box } from 'reakit';
 import { Button } from 'src/components/button/Button';
 import ResultChart from 'src/components/result-chart/ResultChart';
 import { useUser } from 'src/context/user-context';
+import {
+  CONSERVATIVE_PROFILE_LIMIT,
+  AGRESSIVE_PROFILE_LIMIT,
+} from 'src/utils/constants';
 
 const data = [
   {
@@ -48,6 +52,23 @@ export default function Result() {
     query: { quizScore },
   } = useRouter();
 
+  function getInvestorProfileLabel() {
+    if (quizScore <= CONSERVATIVE_PROFILE_LIMIT) {
+      return 'conservative';
+    }
+
+    if (
+      quizScore > CONSERVATIVE_PROFILE_LIMIT &&
+      quizScore < AGRESSIVE_PROFILE_LIMIT
+    ) {
+      return 'modarate';
+    }
+
+    return 'agressive';
+  }
+
+  const investorProfileLabel = getInvestorProfileLabel();
+
   React.useEffect(() => {
     async function triggerEmailSending() {
       try {
@@ -56,7 +77,11 @@ export default function Result() {
           headers: {
             'Content-Type': 'application/json',
           },
-          body: JSON.stringify({ name, email, quizScore }),
+          body: JSON.stringify({
+            name,
+            email,
+            investorProfileLabel,
+          }),
         });
         const json = await res.json();
         console.log('json', json);
@@ -70,7 +95,7 @@ export default function Result() {
     if (!emailSent) {
       triggerEmailSending();
     }
-  }, [emailSent, email, name, quizScore]);
+  }, [emailSent, email, name, investorProfileLabel]);
 
   function retakeQuiz() {
     Router.push('/dados-iniciais');
@@ -88,7 +113,12 @@ export default function Result() {
         </Box>
         <Box className="font-bold text-xl text-center mb-10">
           <p className="text-gray-900">
-            Seu perfil de investidor é Moderado
+            Seu perfil de investidor é{' '}
+            {investorProfileLabel === 'conservative'
+              ? 'Conservador'
+              : investorProfileLabel === 'moderate'
+              ? 'Moderado'
+              : 'Agressivo'}
           </p>
         </Box>
         <Box className="max-w-4xl rounded-lg overflow-hidden border bg-gray-100">
@@ -96,14 +126,40 @@ export default function Result() {
             <Box className="font-bold text-xl mb-2 text-gray-900">
               Descrição do seu perfil
             </Box>
-            <p className="text-gray-700 text-base">
-              Para o investidor de perfil moderado, a segurança é
-              importante, mas ele busca retornos maiores, aceitando,
-              portanto, assumir algum risco. Ele aceita que parte de
-              seu patrimônio seja alocado em renda variável e o
-              restante em aplicações mais estáveis. Além disso, ele
-              preza pela busca de ganhos no médio e longo prazo.
-            </p>
+            {investorProfileLabel === 'conservative' ? (
+              <p className="text-gray-700 text-base">
+                O investidor conservador possui a segurança como
+                referência para as suas aplicações, assumindo os
+                menores riscos possíveis. Em razão da sua baixa
+                tolerância ao risco, mantém em sua carteira um
+                percentual reduzido de produtos de renda variável,
+                dando preferência aos produtos de renda fixa. Possui
+                como um dos objetivos principais a preservação do seu
+                patrimônio. Realizam investimentos sólidos e buscam
+                retorno a longo prazo.
+              </p>
+            ) : investorProfileLabel === 'moderate' ? (
+              <p className="text-gray-700 text-base">
+                Para o investidor de perfil moderado, a segurança é
+                importante, mas ele busca retornos maiores, aceitando,
+                portanto, assumir algum risco. Ele aceita que parte de
+                seu patrimônio seja alocado em renda variável e o
+                restante em aplicações mais estáveis. Além disso, ele
+                preza pela busca de ganhos no médio e longo prazo.
+              </p>
+            ) : (
+              <p className="text-gray-700 text-base">
+                O perfil do investidor agressivo está associado a
+                clientes que possuem amplo conhecimento e domínio do
+                mercado financeiro. O cliente com perfil agressivo
+                busca retornos muito expressivos no curto prazo,
+                suportanto quaisquer riscos. Tal modalidade de
+                investidor realiza as chamadas operações
+                "alavancadas", ciente das chances de perda não só dos
+                recursos investidos na operação, como porventura de
+                outros investimentos que tenham sido aplicados.
+              </p>
+            )}
           </Box>
         </Box>
         <Box className="max-w-4xl rounded-lg overflow-hidden border mt-4 bg-gray-100">

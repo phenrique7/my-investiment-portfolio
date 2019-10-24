@@ -7,19 +7,19 @@
     "question": "Qual a sua idade?",
     "options": [
       {
-        "score": 0,
+        "score": 3,
         "answer": "Abaixo de 25 anos"
       },
       {
-        "score": 1,
+        "score": 2,
         "answer": "Entre 26 a 35 anos"
       },
       {
-        "score": 2,
+        "score": 1,
         "answer": "Entre 36 a 45 anos"
       },
       {
-        "score": 3,
+        "score": 0,
         "answer": "Entre 46 a 55 anos"
       }
     ]
@@ -33,11 +33,11 @@
       },
       {
         "score": 1,
-        "answer": "Até 2 anos"
+        "answer": "Até 3 anos"
       },
       {
         "score": 2,
-        "answer": "2 a 5 anos"
+        "answer": "3 a 5 anos"
       },
       {
         "score": 3,

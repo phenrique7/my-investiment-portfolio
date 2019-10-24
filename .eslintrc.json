@@ -20,6 +20,7 @@
   "rules": {
     "prettier/prettier": ["error"],
     "import/no-unresolved": "off",
+    "no-nested-ternary": "off",
     "react-hooks/rules-of-hooks": "error",
     "react-hooks/exhaustive-deps": "warn",
     "react/react-in-jsx-scope": "off",
