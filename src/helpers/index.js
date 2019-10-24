@@ -4,16 +4,24 @@ export function isEmptyObject(object) {
   );
 }
 
+export function getInitialInvestmentNumber(dataValue) {
+  return dataValue.replace(/R\$\s/, '').replace(/,/, '.');
+}
+
 export function getInitialInvestmentValueScore(value) {
-  // Tratar value que vem em uma string formatada
-  if (value <= 5000) {
+  const initialInvestment = getInitialInvestmentNumber(value);
+
+  if (initialInvestment <= 5000) {
     return 0;
   }
-  if (value > 5000 && value <= 30000) {
+
+  if (initialInvestment > 5000 && initialInvestment <= 30000) {
     return 1;
   }
-  if (value > 30000 && value <= 60000) {
+
+  if (initialInvestment > 30000 && initialInvestment <= 60000) {
     return 2;
   }
+
   return 3;
 }

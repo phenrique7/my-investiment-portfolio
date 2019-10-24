@@ -48,10 +48,9 @@ export default function QuizForm() {
     });
   }
 
-  function getNewAnswers(action, answer) {
-    const newAnswer = action === 'prev' ? null : answer;
+  function getNewAnswers(answer) {
     const currentAnswers = quizAnswers.map((value, index) =>
-      index === stage ? newAnswer : value,
+      index === stage ? answer : value,
     );
 
     setQuizAnswers(currentAnswers);
@@ -60,8 +59,6 @@ export default function QuizForm() {
   }
 
   function previousStage() {
-    const newAnswers = getNewAnswers('prev');
-
     setStage(prevState => {
       const newState = prevState - 1;
 
@@ -69,7 +66,7 @@ export default function QuizForm() {
         LS_USER_DATA_KEY,
         {
           ...user,
-          quizAnswers: newAnswers,
+          quizAnswers,
           quizStage: newState,
         },
         true,
@@ -80,7 +77,7 @@ export default function QuizForm() {
   }
 
   function nextStage(answer) {
-    const newAnswers = getNewAnswers('next', answer);
+    const newAnswers = getNewAnswers(answer);
 
     setStage(prevState => {
       const newState = prevState + 1;
@@ -120,7 +117,6 @@ export default function QuizForm() {
             {stage === FIRST_QUESTION ? (
               <QuizInput
                 answer={quizAnswers[FIRST_QUESTION]}
-                previousStage={previousStage}
                 nextStage={nextStage}
               />
             ) : (

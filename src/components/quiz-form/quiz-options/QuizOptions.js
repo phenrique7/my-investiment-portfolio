@@ -15,6 +15,11 @@ export default function QuizOptions({
   const radio = useRadioState({ state: quizAnswers[stage] });
   const { options } = questions[stage];
 
+  /* React.useEffect(() => {
+    console.log('asd');
+    radio.state = quizAnswers[stage];
+  }, [quizAnswers, radio, stage]); */
+
   function handleSubmit(event) {
     event.preventDefault();
     nextStage(radio.state);
@@ -43,7 +48,7 @@ export default function QuizOptions({
           <Icon reactIcon={MdArrowBack} className="mr-2" />
           Voltar
         </Button>
-        <Button type="submit" disabled={radio.state === undefined}>
+        <Button type="submit" disabled={!radio.state}>
           Próximo
           <Icon reactIcon={MdArrowForward} className="ml-2" />
         </Button>

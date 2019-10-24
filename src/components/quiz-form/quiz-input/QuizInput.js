@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import Link from 'next/link';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import useInputMask from 'src/hooks/useInputMask';
 import { createNumberMask } from 'text-mask-addons';
-import { Button } from 'src/components/button/Button';
+import { LinkButton, Button } from 'src/components/button/Button';
 import Icon from 'src/components/icon/Icon';
 import useInputMutationObserver from 'src/hooks/useInputMutationObserver';
 
@@ -43,11 +44,7 @@ function SubmitButton() {
   );
 }
 
-export default function QuizInput({
-  answer,
-  previousStage,
-  nextStage,
-}) {
+export default function QuizInput({ answer, nextStage }) {
   const input = React.useRef(null);
 
   const maskMoney = createNumberMask({
@@ -120,10 +117,12 @@ export default function QuizInput({
       </label>
       <FormMessage />
       <div className="flex justify-between mt-10">
-        <Button onClick={previousStage} kind="outlined">
-          <Icon reactIcon={MdArrowBack} className="mr-2" />
-          Voltar
-        </Button>
+        <Link href="/dados-iniciais">
+          <LinkButton kind="outlined">
+            <Icon reactIcon={MdArrowBack} className="mr-2" />
+            Voltar
+          </LinkButton>
+        </Link>
         <SubmitButton />
       </div>
     </form>
@@ -135,7 +134,6 @@ QuizInput.defaultProps = {
 };
 
 QuizInput.propTypes = {
-  previousStage: PropTypes.func.isRequired,
   nextStage: PropTypes.func.isRequired,
   answer: PropTypes.string,
 };

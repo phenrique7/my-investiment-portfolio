@@ -1,4 +1,5 @@
 import React from 'react';
+import { getInitialInvestmentNumber } from 'src/helpers';
 
 export default function useInputMutationObserver() {
   const [inputNumber, setInputNumber] = React.useState(0);
@@ -7,8 +8,21 @@ export default function useInputMutationObserver() {
   const [blurEvent, setBlurEvent] = React.useState(false);
 
   React.useEffect(() => {
+    setTimeout(() => {
+      const input = document.querySelector(
+        'input[name="initial-investiment"]',
+      );
+
+      if (input) {
+        const { textContent } = input.attributes['data-value'];
+        setDataValue(textContent);
+      }
+    }, 0);
+  }, []);
+
+  React.useEffect(() => {
     if (dataValue) {
-      const value = dataValue.replace(/R\$\s/, '').replace(/,/, '.');
+      const value = getInitialInvestmentNumber(dataValue);
       setInputNumber(parseFloat(value));
     }
   }, [dataValue]);
