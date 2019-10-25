@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { ResponsivePie } from '@nivo/pie';
 
 export default function ResultChart({ data }) {
@@ -20,6 +21,7 @@ export default function ResultChart({ data }) {
       radialLabelsLinkHorizontalLength={24}
       radialLabelsLinkStrokeWidth={1}
       radialLabelsLinkColor={{ from: 'color' }}
+      sliceLabel={d => `${d.value}%`}
       slicesLabelsSkipAngle={10}
       slicesLabelsTextColor="#333333"
       motionStiffness={90}
@@ -118,3 +120,7 @@ export default function ResultChart({ data }) {
     />
   );
 }
+
+ResultChart.propTypes = {
+  data: PropTypes.array.isRequired,
+};

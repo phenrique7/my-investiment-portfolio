@@ -2,6 +2,7 @@ const express = require('express');
 const next = require('next');
 const bodyParser = require('body-parser');
 const Mail = require('../services/mail');
+const investorProfileDescription = require('../../public/static/investor-profile-description.json');
 
 const dev = process.env.NODE_ENV !== 'production';
 const nextApp = next({ dev });
@@ -18,23 +19,32 @@ nextApp.prepare().then(() => {
   app.post('/send-email', async (req, res) => {
     try {
       if (dev) {
-        console.log('req.body', req.body);
-        const { name, email } = req.body;
+        const { name, email, investorProfileLabel } = req.body;
 
         await Mail.sendMail({
-          from: '"Paulo Henrique" <paulo.henrique@email.com>',
+          from:
+            '"Minha Carteira de Investimentos" <minha.carteira.de.investimentos@gmail.com>',
           to: email,
-          subject: 'Resultado do seu perfil de investidor',
+          subject: 'Aqui está o seu perfil de investidor',
           template: 'quiz-result',
-          context: { name, investorProfile: 'Moderado' },
+          context: {
+            name,
+            profile:
+              investorProfileLabel === 'conservative'
+                ? 'Conservador'
+                : investorProfileLabel === 'moderate'
+                ? 'Moderado'
+                : 'Agressivo',
+            description:
+              investorProfileDescription[investorProfileLabel],
+          },
         });
       }
 
       return res
         .status(200)
-        .json({ email: 'Successfully sending e-mail!' });
+        .json({ email: 'E-mail successfully sent!' });
     } catch (err) {
-      console.log('error on sending e-mail', err);
       return res.status(500);
     }
   });

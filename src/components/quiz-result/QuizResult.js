@@ -5,6 +5,7 @@ import { Box } from 'reakit';
 import { Button } from 'src/components/button/Button';
 import ResultChart from 'src/components/result-chart/ResultChart';
 import { useUser } from 'src/context/user-context';
+import investorProfileDescription from 'public/static/investor-profile-description.json';
 import {
   CONSERVATIVE_PROFILE_LIMIT,
   AGRESSIVE_PROFILE_LIMIT,
@@ -14,31 +15,31 @@ const data = [
   {
     id: 'rust',
     label: 'rust',
-    value: 293,
+    value: 5,
     color: 'hsl(350, 70%, 50%)',
   },
   {
     id: 'ruby',
     label: 'ruby',
-    value: 285,
+    value: 15,
     color: 'hsl(87, 70%, 50%)',
   },
   {
     id: 'elixir',
     label: 'elixir',
-    value: 122,
+    value: 25,
     color: 'hsl(62, 70%, 50%)',
   },
   {
     id: 'make',
     label: 'make',
-    value: 413,
+    value: 20,
     color: 'hsl(138, 70%, 50%)',
   },
   {
     id: 'javascript',
     label: 'javascript',
-    value: 458,
+    value: 30,
     color: 'hsl(220, 70%, 50%)',
   },
 ];
@@ -128,36 +129,15 @@ export default function Result() {
             </Box>
             {investorProfileLabel === 'conservative' ? (
               <p className="text-gray-700 text-base">
-                O investidor conservador possui a segurança como
-                referência para as suas aplicações, assumindo os
-                menores riscos possíveis. Em razão da sua baixa
-                tolerância ao risco, mantém em sua carteira um
-                percentual reduzido de produtos de renda variável,
-                dando preferência aos produtos de renda fixa. Possui
-                como um dos objetivos principais a preservação do seu
-                patrimônio. Realizam investimentos sólidos e buscam
-                retorno a longo prazo.
+                {investorProfileDescription.conservative}
               </p>
             ) : investorProfileLabel === 'moderate' ? (
               <p className="text-gray-700 text-base">
-                Para o investidor de perfil moderado, a segurança é
-                importante, mas ele busca retornos maiores, aceitando,
-                portanto, assumir algum risco. Ele aceita que parte de
-                seu patrimônio seja alocado em renda variável e o
-                restante em aplicações mais estáveis. Além disso, ele
-                preza pela busca de ganhos no médio e longo prazo.
+                {investorProfileDescription.moderate}
               </p>
             ) : (
               <p className="text-gray-700 text-base">
-                O perfil do investidor agressivo está associado a
-                clientes que possuem amplo conhecimento e domínio do
-                mercado financeiro. O cliente com perfil agressivo
-                busca retornos muito expressivos no curto prazo,
-                suportanto quaisquer riscos. Tal modalidade de
-                investidor realiza as chamadas operações
-                "alavancadas", ciente das chances de perda não só dos
-                recursos investidos na operação, como porventura de
-                outros investimentos que tenham sido aplicados.
+                {investorProfileDescription.agressive}
               </p>
             )}
           </Box>

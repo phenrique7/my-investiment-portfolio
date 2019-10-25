@@ -4,39 +4,34 @@ import ResultChart from 'src/components/result-chart/ResultChart';
 
 const data = [
   {
-    id: 'rust',
-    label: 'rust',
-    value: 293,
-    color: 'hsl(350, 70%, 50%)',
+    id: 'Previdência Privada',
+    label: 'Previdência Privada',
+    value: 5,
   },
   {
-    id: 'ruby',
-    label: 'ruby',
-    value: 285,
-    color: 'hsl(87, 70%, 50%)',
+    id: 'Reserva de Emergência',
+    label: 'Reserva de Emergência',
+    value: 15,
   },
   {
     id: 'elixir',
     label: 'elixir',
-    value: 122,
-    color: 'hsl(62, 70%, 50%)',
+    value: 25,
   },
   {
     id: 'make',
     label: 'make',
-    value: 413,
-    color: 'hsl(138, 70%, 50%)',
+    value: 20,
   },
   {
     id: 'javascript',
     label: 'javascript',
-    value: 458,
-    color: 'hsl(220, 70%, 50%)',
+    value: 30,
   },
 ];
 
 storiesOf('Result Chart', module).add('default', () => (
-  <div className="p-4 w-108 h-108">
+  <div className="w-156 h-120 m-auto">
     <ResultChart data={data} />
   </div>
 ));

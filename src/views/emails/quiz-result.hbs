@@ -392,7 +392,7 @@
                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                   <tr>
                     <td>
-                      <p>Olá, Paulo Henrique,</p>
+                      <p>Olá,{{ name }},</p>
                       <p>Parabéns por ter concluído o questionário de perfil de investidor na busca de uma carteira de
                         investimentos alinhada aos seus objetivos.</p>
                       <p>Aqui está o seu resultado:</p>
@@ -416,7 +416,7 @@
                         </tbody>
                       </table>
                       <p align="center" style="font-size: 16px; margin-bottom: 40px"><strong>Seu perfil de investidor é
-                          <span style="color: #4299e1">Moderado</span></strong></p>
+                          <span style="color: #4299e1">{{ profile }}</span></strong></p>
                       <div
                         style="padding: 10px; border: 1px solid #e2e8f0; border-radius: 5px; background-color: #f7fafc; margin-bottom: 40px;">
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0">
@@ -426,11 +426,7 @@
                           </tr>
                           <tr>
                             <td>
-                              <p style="margin-bottom: 0px;">Para o investidor de perfil moderado, a segurança é
-                                importante, mas ele busca retornos maiores, aceitando, portanto, assumir algum risco.
-                                Ele aceita que parte de seu patrimônio seja alocado em renda variável e o restante em
-                                aplicações mais estáveis. Além disso, ele preza pela busca de ganhos no médio e longo
-                                prazo.</p>
+                              <p style="margin-bottom: 0px;">{{ description }}</p>
                             </td>
                           </tr>
                         </table>
