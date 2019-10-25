@@ -25,3 +25,7 @@ export function getInitialInvestmentValueScore(value) {
 
   return 3;
 }
+
+export function emailIsValid(email) {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}

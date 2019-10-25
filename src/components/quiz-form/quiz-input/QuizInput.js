@@ -15,10 +15,10 @@ function FormMessage() {
     inputNumber,
   } = useInputMutationObserver();
 
-  if (inputNumber === 0 && blurEvent) {
+  if (!emptyTextField && inputNumber < 40 && blurEvent) {
     return (
       <p className="text-red-500 text-xs">
-        Valor inicial tem que ser maior que R$ 0,00.
+        Investimento inicial tem que ser no mínimo R$ 40,00.
       </p>
     );
   }
@@ -99,7 +99,7 @@ export default function QuizInput({ answer, nextStage }) {
           ref={input}
           onChange={handleChange}
           onBlur={handleBlur}
-          placeholder="Valor inicial"
+          placeholder="Investimento inicial"
           className={`
             w-full
             rounded

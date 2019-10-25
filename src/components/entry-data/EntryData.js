@@ -5,7 +5,7 @@ import { LinkButton, Button } from 'src/components/button/Button';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import Icon from 'src/components/icon/Icon';
 import useMedia from 'src/hooks/useMedia';
-import { isEmptyObject } from 'src/helpers';
+import { isEmptyObject, emailIsValid } from 'src/helpers';
 import { useUser } from 'src/context/user-context';
 import { setStorage } from 'src/utils/storage';
 import { LS_USER_DATA_KEY } from 'src/utils/constants';
@@ -38,6 +38,8 @@ export default function EntryData() {
 
       if (!values.email) {
         errors.email = 'E-mail não pode ser vazio.';
+      } else if (!emailIsValid(values.email)) {
+        errors.email = 'Endereço de e-mail inválido.';
       }
 
       if (Object.keys(errors).length) {
@@ -118,6 +120,7 @@ export default function EntryData() {
                     </div>
                     <div className="md-min:w-4/5">
                       <FormInput
+                        required
                         name="name"
                         className="appearance-none border-2 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"
                         {...form}
@@ -141,6 +144,7 @@ export default function EntryData() {
                     </div>
                     <div className="md-min:w-4/5">
                       <FormInput
+                        required
                         type="email"
                         name="email"
                         className="appearance-none border-2 border-gray-300 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-blue-500"

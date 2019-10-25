@@ -20,7 +20,7 @@
       },
       {
         "score": 0,
-        "answer": "Entre 46 a 55 anos"
+        "answer": "Mais de 45 anos"
       }
     ]
   },
@@ -46,23 +46,23 @@
     ]
   },
   {
-    "question": "Sua experiência com investimentos pode ser descrita como alguém que",
+    "question": "Sua experiência com investimentos pode ser aproximadamente descrita como alguém que",
     "options": [
       {
         "score": 0,
-        "answer": "Está investindo pela primeira vez"
+        "answer": "Não tem experiencia e está investindo pela primeira vez"
       },
       {
         "score": 1,
-        "answer": "Tem pouca experiência em investimentos, e que somente utiliza a poupança como reserva"
+        "answer": "Tem pouca experiência, e que já fez investimentos com CDB's, poupança ou Tesouro direto"
       },
       {
         "score": 2,
-        "answer": "Possui alguma experiência e já investiu em alguns ativos como fundos, CDBs ou Tesouro direto"
+        "answer": "Possui uma experiência razoável e já investiu em alguns ativos como debêntures, LCI/LCA e fundos cambiais ou de renda fixa"
       },
       {
         "score": 3,
-        "answer": "Possui ampla experiência e conhece bem a respeito de ações e fundos multimercados"
+        "answer": "Possui ampla experiência e conhece bem a respeito de ações, derivativos e fundos multimercados"
       }
     ]
   },
@@ -92,15 +92,15 @@
       },
       {
         "score": 1,
-        "answer": "Construir uma reserva de emergência"
+        "answer": "Formar uma poupança para utilização futura"
       },
       {
         "score": 2,
-        "answer": "Guardar dinheiro para a aposentadoria"
+        "answer": "Diversificar seus investimentos"
       },
       {
         "score": 3,
-        "answer": "Alcançar um objetivo definido (Comprar imóvel, carro, viagem)"
+        "answer": "Obter rentabilidade superior à proporcionada por investimentos tradicionais de renda fixa, mesmo assumindo risco de possíveis perdas"
       }
     ]
   }
