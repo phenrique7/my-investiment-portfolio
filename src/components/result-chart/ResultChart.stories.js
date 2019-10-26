@@ -14,24 +14,29 @@ const data = [
     value: 15,
   },
   {
-    id: 'elixir',
-    label: 'elixir',
-    value: 25,
+    id: 'Controle de Finanças',
+    label: 'Controle de Finanças',
+    value: 10,
   },
   {
-    id: 'make',
-    label: 'make',
+    id: 'Ativos de Renda Fixa',
+    label: 'Ativos de Renda Fixa',
+    value: 30,
+  },
+  {
+    id: 'Fundos multimercados',
+    label: 'Fundos multimercados',
     value: 20,
   },
   {
-    id: 'javascript',
-    label: 'javascript',
-    value: 30,
+    id: 'Ativos de Renda Variável',
+    label: 'Ativos de Renda Variável',
+    value: 10,
   },
 ];
 
 storiesOf('Result Chart', module).add('default', () => (
-  <div className="w-156 h-120 m-auto">
+  <div className="w-192 h-120 m-auto">
     <ResultChart data={data} />
   </div>
 ));

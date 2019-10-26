@@ -10,7 +10,14 @@ export default function ResultChart({ data }) {
       innerRadius={0.5}
       padAngle={0.7}
       cornerRadius={3}
-      colors={{ scheme: 'nivo' }}
+      colors={[
+        '#42a5f5',
+        '#f47560',
+        '#f1e15b',
+        '#e8a838',
+        '#ba68c8',
+        '#26a69a',
+      ]}
       borderWidth={1}
       borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
       radialLabelsSkipAngle={10}
@@ -50,61 +57,25 @@ export default function ResultChart({ data }) {
       fill={[
         {
           match: {
-            id: 'ruby',
+            id: 'Ativos de Renda Variável',
           },
           id: 'dots',
         },
         {
           match: {
-            id: 'c',
-          },
-          id: 'dots',
-        },
-        {
-          match: {
-            id: 'go',
-          },
-          id: 'dots',
-        },
-        {
-          match: {
-            id: 'python',
-          },
-          id: 'dots',
-        },
-        {
-          match: {
-            id: 'scala',
-          },
-          id: 'lines',
-        },
-        {
-          match: {
-            id: 'lisp',
-          },
-          id: 'lines',
-        },
-        {
-          match: {
-            id: 'elixir',
-          },
-          id: 'lines',
-        },
-        {
-          match: {
-            id: 'javascript',
+            id: 'Fundos multimercados',
           },
           id: 'lines',
         },
       ]}
       legends={[
         {
-          anchor: 'bottom',
-          direction: 'row',
-          translateY: 56,
+          anchor: 'bottom-right',
+          direction: 'column',
+          translateY: 80,
           itemWidth: 100,
-          itemHeight: 18,
-          itemTextColor: '#999',
+          itemHeight: 22,
+          itemTextColor: '#444',
           symbolSize: 18,
           symbolShape: 'circle',
           effects: [

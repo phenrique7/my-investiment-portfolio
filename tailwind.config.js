@@ -21,6 +21,9 @@ module.exports = {
         132: '33rem',
         144: '36rem',
         156: '39rem',
+        168: '42rem',
+        180: '45rem',
+        192: '48rem',
       },
     },
     screens: {
