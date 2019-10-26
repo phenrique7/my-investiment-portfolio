@@ -2,7 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { ResponsivePie } from '@nivo/pie';
 
-export default function ResultChart({ data }) {
+export default function ResultChart(props) {
+  const {
+    profileData: { data, fill, colors },
+  } = props;
+
   return (
     <ResponsivePie
       data={data}
@@ -10,14 +14,7 @@ export default function ResultChart({ data }) {
       innerRadius={0.5}
       padAngle={0.7}
       cornerRadius={3}
-      colors={[
-        '#42a5f5',
-        '#f47560',
-        '#f1e15b',
-        '#e8a838',
-        '#ba68c8',
-        '#26a69a',
-      ]}
+      colors={colors}
       borderWidth={1}
       borderColor={{ from: 'color', modifiers: [['darker', 0.2]] }}
       radialLabelsSkipAngle={10}
@@ -34,6 +31,7 @@ export default function ResultChart({ data }) {
       motionStiffness={90}
       motionDamping={15}
       animate
+      fill={fill}
       defs={[
         {
           id: 'dots',
@@ -54,44 +52,13 @@ export default function ResultChart({ data }) {
           spacing: 10,
         },
       ]}
-      fill={[
-        {
-          match: {
-            id: 'Ativos de Renda Variável',
-          },
-          id: 'dots',
-        },
-        {
-          match: {
-            id: 'Fundos multimercados',
-          },
-          id: 'lines',
-        },
-      ]}
-      legends={[
-        {
-          anchor: 'bottom-right',
-          direction: 'column',
-          translateY: 80,
-          itemWidth: 100,
-          itemHeight: 22,
-          itemTextColor: '#444',
-          symbolSize: 18,
-          symbolShape: 'circle',
-          effects: [
-            {
-              on: 'hover',
-              style: {
-                itemTextColor: '#000',
-              },
-            },
-          ],
-        },
-      ]}
     />
   );
 }
 
 ResultChart.propTypes = {
+  profileData: PropTypes.object.isRequired,
   data: PropTypes.array.isRequired,
+  fill: PropTypes.array.isRequired,
+  colors: PropTypes.array.isRequired,
 };
