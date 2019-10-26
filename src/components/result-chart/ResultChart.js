@@ -56,9 +56,15 @@ export default function ResultChart(props) {
   );
 }
 
+ResultChart.defaultProps = {
+  data: [],
+  fill: [],
+  colors: [],
+};
+
 ResultChart.propTypes = {
   profileData: PropTypes.object.isRequired,
-  data: PropTypes.array.isRequired,
-  fill: PropTypes.array.isRequired,
-  colors: PropTypes.array.isRequired,
+  data: PropTypes.array,
+  fill: PropTypes.array,
+  colors: PropTypes.array,
 };

@@ -6,6 +6,7 @@ import { Button } from 'src/components/button/Button';
 import ResultChart from 'src/components/result-chart/ResultChart';
 import { useUser } from 'src/context/user-context';
 import investorProfileDescription from 'public/static/investor-profile-description.json';
+import Legends from 'src/components/result-chart/Legends';
 import {
   CONSERVATIVE_PROFILE_LIMIT,
   AGRESSIVE_PROFILE_LIMIT,
@@ -32,7 +33,7 @@ export default function Result() {
       quizScore > CONSERVATIVE_PROFILE_LIMIT &&
       quizScore < AGRESSIVE_PROFILE_LIMIT
     ) {
-      return 'modarate';
+      return 'moderate';
     }
 
     return 'agressive';
@@ -122,22 +123,19 @@ export default function Result() {
             <Box className="font-bold text-xl mb-2 text-gray-900">
               Carteira de investimentos sugerida
             </Box>
-            <Box className="p-4 w-108 h-108 m-auto">
+            <Box className="p-4 w-192 h-120 m-auto">
               {investorProfileLabel === 'conservative' ? (
-                <p className="text-gray-700 text-base">
-                  <ResultChart
-                    profileData={CONSERVATIVE_PROFILE_DATA}
-                  />
-                </p>
+                <ResultChart
+                  profileData={CONSERVATIVE_PROFILE_DATA}
+                />
               ) : investorProfileLabel === 'moderate' ? (
-                <p className="text-gray-700 text-base">
-                  <ResultChart profileData={MODERATE_PROFILE_DATA} />
-                </p>
+                <ResultChart profileData={MODERATE_PROFILE_DATA} />
               ) : (
-                <p className="text-gray-700 text-base">
-                  <ResultChart profileData={AGRESSIVE_PROFILE_DATA} />
-                </p>
+                <ResultChart profileData={AGRESSIVE_PROFILE_DATA} />
               )}
+            </Box>
+            <Box className="flex justify-center">
+              <Legends />
             </Box>
           </Box>
         </Box>
