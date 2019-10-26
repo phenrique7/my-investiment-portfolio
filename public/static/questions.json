@@ -84,23 +84,23 @@
     ]
   },
   {
-    "question": "O principal objetivo de seus investimentos é",
+    "question": "O principal objetivo de seus investimentos pode ser aproximadamente descrito em",
     "options": [
       {
         "score": 0,
-        "answer": "Preservar meu patrimônio"
+        "answer": "Preservar meu patrimônio, sem risco de perdas dos recursos investidos"
       },
       {
         "score": 1,
-        "answer": "Formar uma poupança para utilização futura"
+        "answer": "Formar uma reserva/poupança para utilização futura (Ex.: reserva de emergência, previdência privada)"
       },
       {
         "score": 2,
-        "answer": "Diversificar seus investimentos"
+        "answer": "Diversificar os investimentos a fim de obter rentabilidade um pouco acima das aplicações tradicionais, aceitando um risco de pequenas oscilações"
       },
       {
         "score": 3,
-        "answer": "Obter rentabilidade superior à proporcionada por investimentos tradicionais de renda fixa, mesmo assumindo risco de possíveis perdas"
+        "answer": "Obter uma rentabilidade elevada, assumindo o risco de perdas expressivas dos recursos investidos"
       }
     ]
   }
