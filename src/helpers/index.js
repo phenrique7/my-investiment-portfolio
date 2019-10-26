@@ -5,7 +5,15 @@ export function isEmptyObject(object) {
 }
 
 export function getInitialInvestmentNumber(dataValue) {
-  return dataValue.replace(/R\$\s/, '').replace(/,/, '.');
+  let value = dataValue;
+
+  if (/\./.test(value)) {
+    value = value.replace(/\./, '');
+  }
+
+  value = value.replace(/R\$\s/, '').replace(/,/, '.');
+
+  return parseFloat(value);
 }
 
 export function getInitialInvestmentValueScore(value) {

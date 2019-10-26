@@ -15,6 +15,8 @@ function FormMessage() {
     inputNumber,
   } = useInputMutationObserver();
 
+  console.log('inputNumber', inputNumber);
+
   if (!emptyTextField && inputNumber < 40 && blurEvent) {
     return (
       <p className="text-red-500 text-xs">

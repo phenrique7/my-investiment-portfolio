@@ -9,40 +9,10 @@ import investorProfileDescription from 'public/static/investor-profile-descripti
 import {
   CONSERVATIVE_PROFILE_LIMIT,
   AGRESSIVE_PROFILE_LIMIT,
+  CONSERVATIVE_PROFILE_DATA,
+  MODERATE_PROFILE_DATA,
+  AGRESSIVE_PROFILE_DATA,
 } from 'src/utils/constants';
-
-const data = [
-  {
-    id: 'rust',
-    label: 'rust',
-    value: 5,
-    color: 'hsl(350, 70%, 50%)',
-  },
-  {
-    id: 'ruby',
-    label: 'ruby',
-    value: 15,
-    color: 'hsl(87, 70%, 50%)',
-  },
-  {
-    id: 'elixir',
-    label: 'elixir',
-    value: 25,
-    color: 'hsl(62, 70%, 50%)',
-  },
-  {
-    id: 'make',
-    label: 'make',
-    value: 20,
-    color: 'hsl(138, 70%, 50%)',
-  },
-  {
-    id: 'javascript',
-    label: 'javascript',
-    value: 30,
-    color: 'hsl(220, 70%, 50%)',
-  },
-];
 
 export default function Result() {
   const [emailSent, setEmailSent] = React.useState(false);
@@ -84,8 +54,8 @@ export default function Result() {
             investorProfileLabel,
           }),
         });
-        const json = await res.json();
-        console.log('json', json);
+
+        await res.json();
       } catch (error) {
         console.log('An error occured while sending e-mail', error);
       } finally {
@@ -114,12 +84,17 @@ export default function Result() {
         </Box>
         <Box className="font-bold text-xl text-center mb-10">
           <p className="text-gray-900">
-            Seu perfil de investidor é{' '}
-            {investorProfileLabel === 'conservative'
-              ? 'Conservador'
-              : investorProfileLabel === 'moderate'
-              ? 'Moderado'
-              : 'Agressivo'}
+            Seu perfil de investidor é
+            {(() => {
+              switch (investorProfileLabel) {
+                case 'conservative':
+                  return ' Conservador';
+                case 'moderate':
+                  return ' Moderado';
+                default:
+                  return ' Agressivo';
+              }
+            })()}
           </p>
         </Box>
         <Box className="max-w-4xl rounded-lg overflow-hidden border bg-gray-100">
@@ -148,7 +123,21 @@ export default function Result() {
               Carteira de investimentos sugerida
             </Box>
             <Box className="p-4 w-108 h-108 m-auto">
-              <ResultChart data={data} />
+              {investorProfileLabel === 'conservative' ? (
+                <p className="text-gray-700 text-base">
+                  <ResultChart
+                    profileData={CONSERVATIVE_PROFILE_DATA}
+                  />
+                </p>
+              ) : investorProfileLabel === 'moderate' ? (
+                <p className="text-gray-700 text-base">
+                  <ResultChart profileData={MODERATE_PROFILE_DATA} />
+                </p>
+              ) : (
+                <p className="text-gray-700 text-base">
+                  <ResultChart profileData={AGRESSIVE_PROFILE_DATA} />
+                </p>
+              )}
             </Box>
           </Box>
         </Box>
