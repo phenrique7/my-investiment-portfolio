@@ -12,13 +12,28 @@ export default function QuizOptions({
   nextStage,
   quizAnswers,
 }) {
+  const radioRef = React.useRef(null);
+  const [buttonDisabled, setButtonDisabled] = React.useState(true);
   const radio = useRadioState({ state: quizAnswers[stage] });
   const { options } = questions[stage];
 
-  /* React.useEffect(() => {
-    console.log('asd');
-    radio.state = quizAnswers[stage];
-  }, [quizAnswers, radio, stage]); */
+  React.useEffect(() => {
+    if (radioRef !== null) {
+      let radioInputChecked = false;
+
+      radioRef.current.querySelectorAll('input').forEach(element => {
+        if (element.checked) {
+          radioInputChecked = true;
+        }
+      });
+
+      if (radioInputChecked) {
+        setButtonDisabled(false);
+      } else {
+        setButtonDisabled(true);
+      }
+    }
+  }, [stage, radio.state]);
 
   function handleSubmit(event) {
     event.preventDefault();
@@ -30,6 +45,7 @@ export default function QuizOptions({
       <RadioGroup
         aria-label="respostas"
         className="flex flex-col text-gray-700"
+        ref={radioRef}
         {...radio}
       >
         {options.map(({ answer }) => (
@@ -48,7 +64,7 @@ export default function QuizOptions({
           <Icon reactIcon={MdArrowBack} className="mr-2" />
           Voltar
         </Button>
-        <Button type="submit" disabled={!radio.state}>
+        <Button type="submit" disabled={buttonDisabled}>
           Próximo
           <Icon reactIcon={MdArrowForward} className="ml-2" />
         </Button>
