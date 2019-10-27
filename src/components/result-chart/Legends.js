@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Box } from 'reakit';
 
 function NormalCircle() {
@@ -36,7 +37,7 @@ function NormalCircle() {
 
 function CircleWithLines() {
   return (
-    <svg height="25px" width="195px">
+    <svg height="25px" width="190px">
       <defs>
         <pattern
           id="lines.bg"
@@ -134,12 +135,20 @@ function CircleWithDots() {
   );
 }
 
-export default function Legends() {
+export default function Legends({ showCircleWithDots }) {
   return (
     <Box className="flex justify-center w-full">
       <NormalCircle />
       <CircleWithLines />
-      <CircleWithDots />
+      {showCircleWithDots && <CircleWithDots />}
     </Box>
   );
 }
+
+Legends.defaultProps = {
+  showCircleWithDots: true,
+};
+
+Legends.propTypes = {
+  showCircleWithDots: PropTypes.bool,
+};

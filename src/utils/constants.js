@@ -50,7 +50,7 @@ export const CONSERVATIVE_PROFILE_DATA = {
       match: {
         id: 'Fundos de Ações',
       },
-      id: 'dots',
+      id: 'lines',
     },
     {
       match: {

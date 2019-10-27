@@ -14,7 +14,7 @@ storiesOf('Result Chart', module)
     <Box className="w-192 h-120 m-auto">
       <ResultChart profileData={CONSERVATIVE_PROFILE_DATA} />
       <Box className="flex justify-center">
-        <Legends />
+        <Legends showCircleWithDots={false} />
       </Box>
     </Box>
   ))

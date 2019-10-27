@@ -135,7 +135,11 @@ export default function Result() {
               )}
             </Box>
             <Box className="flex justify-center">
-              <Legends />
+              <Legends
+                showCircleWithDots={
+                  !(investorProfileLabel === 'conservative')
+                }
+              />
             </Box>
           </Box>
         </Box>
