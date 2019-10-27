@@ -16,6 +16,14 @@ function useInputMask({
   const textMaskRef = React.useRef(null);
 
   React.useEffect(() => {
+    const input = document.querySelector(
+      'input[name="initial-investiment"]',
+    );
+
+    input.setAttribute('data-value', initialValue);
+  }, [initialValue]);
+
+  React.useEffect(() => {
     if (!inputRef.current) {
       return;
     }

@@ -1,42 +1,36 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import ResultChart from 'src/components/result-chart/ResultChart';
+import { Box } from 'reakit';
+import Legends from 'src/components/result-chart/Legends';
+import {
+  CONSERVATIVE_PROFILE_DATA,
+  MODERATE_PROFILE_DATA,
+  AGRESSIVE_PROFILE_DATA,
+} from 'src/utils/constants';
 
-const data = [
-  {
-    id: 'rust',
-    label: 'rust',
-    value: 293,
-    color: 'hsl(350, 70%, 50%)',
-  },
-  {
-    id: 'ruby',
-    label: 'ruby',
-    value: 285,
-    color: 'hsl(87, 70%, 50%)',
-  },
-  {
-    id: 'elixir',
-    label: 'elixir',
-    value: 122,
-    color: 'hsl(62, 70%, 50%)',
-  },
-  {
-    id: 'make',
-    label: 'make',
-    value: 413,
-    color: 'hsl(138, 70%, 50%)',
-  },
-  {
-    id: 'javascript',
-    label: 'javascript',
-    value: 458,
-    color: 'hsl(220, 70%, 50%)',
-  },
-];
-
-storiesOf('Result Chart', module).add('default', () => (
-  <div className="p-4 w-108 h-108">
-    <ResultChart data={data} />
-  </div>
-));
+storiesOf('Result Chart', module)
+  .add('profile conservative', () => (
+    <Box className="w-192 h-120 m-auto">
+      <ResultChart profileData={CONSERVATIVE_PROFILE_DATA} />
+      <Box className="flex justify-center">
+        <Legends showCircleWithDots={false} />
+      </Box>
+    </Box>
+  ))
+  .add('profile moderate', () => (
+    <Box className="w-192 h-120 m-auto">
+      <ResultChart profileData={MODERATE_PROFILE_DATA} />
+      <Box className="flex justify-center">
+        <Legends />
+      </Box>
+    </Box>
+  ))
+  .add('profile agressive', () => (
+    <Box className="w-192 h-120 m-auto">
+      <ResultChart profileData={AGRESSIVE_PROFILE_DATA} />
+      <Box className="flex justify-center">
+        <Legends />
+      </Box>
+    </Box>
+  ));

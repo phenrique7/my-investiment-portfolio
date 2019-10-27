@@ -12,17 +12,32 @@ export default function QuizOptions({
   nextStage,
   quizAnswers,
 }) {
+  const radioRef = React.useRef(null);
+  const [buttonDisabled, setButtonDisabled] = React.useState(true);
   const radio = useRadioState({ state: quizAnswers[stage] });
   const { options } = questions[stage];
 
+  React.useEffect(() => {
+    if (radioRef !== null) {
+      let radioInputChecked = false;
+
+      radioRef.current.querySelectorAll('input').forEach(element => {
+        if (element.checked) {
+          radioInputChecked = true;
+        }
+      });
+
+      if (radioInputChecked) {
+        setButtonDisabled(false);
+      } else {
+        setButtonDisabled(true);
+      }
+    }
+  }, [stage, radio.state]);
+
   function handleSubmit(event) {
     event.preventDefault();
-
-    const { score } = options.find(
-      ({ answer }) => radio.state === answer,
-    );
-
-    nextStage(radio.state, score);
+    nextStage(radio.state);
   }
 
   return (
@@ -30,6 +45,7 @@ export default function QuizOptions({
       <RadioGroup
         aria-label="respostas"
         className="flex flex-col text-gray-700"
+        ref={radioRef}
         {...radio}
       >
         {options.map(({ answer }) => (
@@ -43,12 +59,12 @@ export default function QuizOptions({
           </label>
         ))}
       </RadioGroup>
-      <div className="flex justify-between mt-10">
+      <div className="flex justify-between items-center mt-10">
         <Button onClick={previousStage} kind="outlined">
           <Icon reactIcon={MdArrowBack} className="mr-2" />
           Voltar
         </Button>
-        <Button type="submit" disabled={radio.state === undefined}>
+        <Button type="submit" disabled={buttonDisabled}>
           Próximo
           <Icon reactIcon={MdArrowForward} className="ml-2" />
         </Button>
