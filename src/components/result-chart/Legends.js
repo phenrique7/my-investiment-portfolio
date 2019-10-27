@@ -5,7 +5,7 @@ import { Box } from 'reakit';
 function NormalCircle() {
   return (
     <svg height="25px" width="175px">
-      <g transform="translate(0,3)">
+      <g transform="translate(3,3)">
         <rect width="230" height="18" fill="transparent" />
         <circle
           r="9"
@@ -60,7 +60,7 @@ function CircleWithLines() {
           />
         </pattern>
       </defs>
-      <g transform="translate(0,3)">
+      <g transform="translate(3,3)">
         <rect width="230" height="18" fill="transparent" />
         <circle
           r="9"
@@ -105,7 +105,7 @@ function CircleWithDots() {
           <circle cx="7.5" cy="7.5" r="2" fill="black" />
         </pattern>
       </defs>
-      <g transform="translate(0,3)">
+      <g transform="translate(3,3)">
         <rect width="230" height="18" fill="transparent" />
         <circle
           r="9"

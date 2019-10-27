@@ -39,22 +39,25 @@ export default function Result() {
     return 'agressive';
   }
 
-  const investorProfileLabel = getInvestorProfileLabel();
+  const investorProfile = getInvestorProfileLabel();
 
   React.useEffect(() => {
     async function triggerEmailSending() {
       try {
-        const res = await fetch('http://localhost:3000/send-email', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
+        const res = await fetch(
+          'http://192.168.15.7:3000/send-email',
+          {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+              name,
+              email,
+              investorProfile,
+            }),
           },
-          body: JSON.stringify({
-            name,
-            email,
-            investorProfileLabel,
-          }),
-        });
+        );
 
         await res.json();
       } catch (error) {
@@ -67,7 +70,7 @@ export default function Result() {
     if (!emailSent) {
       triggerEmailSending();
     }
-  }, [emailSent, email, name, investorProfileLabel]);
+  }, [emailSent, email, name, investorProfile]);
 
   function retakeQuiz() {
     Router.push('/dados-iniciais');
@@ -87,7 +90,7 @@ export default function Result() {
           <p className="text-gray-900">
             Seu perfil de investidor é
             {(() => {
-              switch (investorProfileLabel) {
+              switch (investorProfile) {
                 case 'conservative':
                   return ' Conservador';
                 case 'moderate':
@@ -103,11 +106,11 @@ export default function Result() {
             <Box className="font-bold text-xl mb-2 text-gray-900">
               Descrição do seu perfil
             </Box>
-            {investorProfileLabel === 'conservative' ? (
+            {investorProfile === 'conservative' ? (
               <p className="text-gray-700 text-base">
                 {investorProfileDescription.conservative}
               </p>
-            ) : investorProfileLabel === 'moderate' ? (
+            ) : investorProfile === 'moderate' ? (
               <p className="text-gray-700 text-base">
                 {investorProfileDescription.moderate}
               </p>
@@ -124,11 +127,11 @@ export default function Result() {
               Carteira de investimentos sugerida
             </Box>
             <Box className="p-4 w-192 h-120 m-auto">
-              {investorProfileLabel === 'conservative' ? (
+              {investorProfile === 'conservative' ? (
                 <ResultChart
                   profileData={CONSERVATIVE_PROFILE_DATA}
                 />
-              ) : investorProfileLabel === 'moderate' ? (
+              ) : investorProfile === 'moderate' ? (
                 <ResultChart profileData={MODERATE_PROFILE_DATA} />
               ) : (
                 <ResultChart profileData={AGRESSIVE_PROFILE_DATA} />
@@ -137,7 +140,7 @@ export default function Result() {
             <Box className="flex justify-center">
               <Legends
                 showCircleWithDots={
-                  !(investorProfileLabel === 'conservative')
+                  !(investorProfile === 'conservative')
                 }
               />
             </Box>

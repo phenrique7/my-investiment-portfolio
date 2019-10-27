@@ -392,9 +392,9 @@
                 <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                   <tr>
                     <td>
-                      <p>Olá,{{ name }},</p>
-                      <p>Parabéns por ter concluído o questionário de perfil de investidor na busca de uma carteira de
-                        investimentos alinhada aos seus objetivos.</p>
+                      <p>Olá, {{ name }}!</p>
+                      <p>Parabéns por ter concluído o questionário de perfil de investidor na busca por uma carteira de
+                        investimentos que esteja alinhada aos seus objetivos!</p>
                       <p>Aqui está o seu resultado:</p>
                       <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">
                         <tbody>
@@ -404,9 +404,8 @@
                                 <tbody>
                                   <tr>
                                     <td>
-                                      <img data-dz-thumbnail=""
-                                        src="https://my-investiment-portfolio.pauloh1288.now.sh/static/images/investor-profile.png"
-                                        alt="CloudBackup Web" border="0" style="max-width: 100%;" />
+                                      <img data-dz-thumbnail="" src="{{imagesBaseUrl}}/investor-profile.png"
+                                        alt="Perfil do investidor" border="0" style="max-width: 100%;" />
                                     </td>
                                   </tr>
                                 </tbody>
@@ -427,6 +426,25 @@
                           <tr>
                             <td>
                               <p style="margin-bottom: 0px;">{{ description }}</p>
+                            </td>
+                          </tr>
+                        </table>
+                      </div>
+                      <div
+                        style="padding: 10px; border: 1px solid #e2e8f0; border-radius: 5px; background-color: #f7fafc; margin-bottom: 40px;">
+                        <table role="presentation" border="0" cellpadding="0" cellspacing="0">
+                          <tr>
+                            <td>
+                              <span style="display: block; font-size: 16px; margin-bottom: 10px;">
+                                <strong>Carteira de investimentos sugerida</strong>
+                              </span>
+                            </td>
+                          </tr>
+                          <tr>
+                            <td>
+                              <img data-dz-thumbnail="" src="{{chartImageUrl}}"
+                                alt="Gráfico de alocação de investimentos para o perfil {{profile}}" border="0"
+                                style="max-width: 100%;" />
                             </td>
                           </tr>
                         </table>
