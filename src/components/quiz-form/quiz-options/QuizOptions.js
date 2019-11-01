@@ -8,11 +8,9 @@ import { Button } from 'src/components/button/Button';
 import questions from 'public/static/questions.json';
 
 export default function QuizOptions() {
-  const {
-    query: { question },
-  } = useRouter();
-  const { previousQuestion, nextQuestion, answers } = useQuiz();
-  const radioRef = React.useRef(null);
+  const router = useRouter();
+  const question = parseInt(router.query.question, 10);
+  const { answers, previousQuestion, nextQuestion } = useQuiz();
   const radio = useRadioState({ state: answers[question - 1] });
   const { options } = questions[question - 1];
 
@@ -26,7 +24,6 @@ export default function QuizOptions() {
       <RadioGroup
         aria-label="respostas"
         className="flex flex-col text-gray-700"
-        ref={radioRef}
         {...radio}
       >
         {options.map(({ answer }) => (

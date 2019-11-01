@@ -3,28 +3,27 @@ import Router from 'next/router';
 import PropTypes from 'prop-types';
 import { useUser } from 'src/context/user-context';
 import { setStorage, getStorage } from 'src/utils/storage';
-import { getInitialInvestmentValueScore } from 'src/helpers';
 import { MAX_QUESTIONS, LS_USER_DATA_KEY } from 'src/utils/constants';
 import questions from 'public/static/questions.json';
+import {
+  getInitialInvestmentValueScore,
+  initialAnswers,
+} from 'src/helpers';
 
 const QuizContext = React.createContext();
 
 function QuizProvider({ children }) {
   const { user } = useUser();
-  const [answers, setAnswers] = React.useState(() =>
-    new Array(MAX_QUESTIONS).fill(null),
-  );
+  const [answers, setAnswers] = React.useState(initialAnswers);
 
   React.useEffect(() => {
-    if (user.quizQuestion > 0) {
-      const userDataStorage = getStorage(LS_USER_DATA_KEY);
+    const userDataStorage = getStorage(LS_USER_DATA_KEY);
+
+    if (userDataStorage) {
       const userData = JSON.parse(userDataStorage);
-
       setAnswers(userData.answers);
-
-      Router.push(`/questionario/${user.quizQuestion}`);
     }
-  }, [user.quizQuestion]);
+  }, []);
 
   function calculateQuizScore() {
     return questions.reduce((accumulator, question, index) => {
@@ -47,7 +46,7 @@ function QuizProvider({ children }) {
 
   function getNewAnswers(question, answer) {
     const currentAnswers = answers.map((value, index) =>
-      index === question ? answer : value,
+      index === question - 1 ? answer : value,
     );
 
     setAnswers(currentAnswers);
@@ -56,28 +55,18 @@ function QuizProvider({ children }) {
   }
 
   function previousQuestion(question) {
-    setStorage(
-      LS_USER_DATA_KEY,
-      {
-        ...user,
-        answers,
-        quizQuestion: question,
-      },
-      true,
-    );
-
     Router.push(`/questionario/${question - 1}`);
   }
 
   function nextQuestion(question, answer) {
-    const newAnswers = getNewAnswers(answer);
+    const newAnswers = getNewAnswers(question, answer);
 
     setStorage(
       LS_USER_DATA_KEY,
       {
         ...user,
         answers: newAnswers,
-        quizQuestion: question,
+        quizQuestion: question + 1,
       },
       true,
     );

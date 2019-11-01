@@ -8,7 +8,7 @@ import questions from 'public/static/questions.json';
 
 export default function QuizForm() {
   const router = useRouter();
-  const { question } = router.query;
+  const question = parseInt(router.query.question, 10);
   const { description } = questions[question - 1];
 
   return (
