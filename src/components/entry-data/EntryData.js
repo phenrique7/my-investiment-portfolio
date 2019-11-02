@@ -93,7 +93,7 @@ export default function EntryData() {
                 <Icon reactIcon={MdArrowBack} className="mr-2" />
                 Voltar
               </Button>
-              <Link href="/questionario/1">
+              <Link href="/questionario?question=1">
                 <LinkButton>
                   Prosseguir
                   <Icon reactIcon={MdArrowForward} className="ml-2" />

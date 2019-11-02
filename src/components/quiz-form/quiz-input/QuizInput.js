@@ -47,7 +47,7 @@ function SubmitButton() {
 
 export default function QuizInput() {
   const { answers, nextQuestion } = useQuiz();
-  const answer = answers[FIRST_QUESTION];
+  const answer = answers[FIRST_QUESTION - 1];
   const input = React.useRef(null);
 
   const maskMoney = createNumberMask({

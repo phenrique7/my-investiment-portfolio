@@ -21,7 +21,7 @@ function QuizProvider({ children }) {
 
     if (userDataStorage) {
       const userData = JSON.parse(userDataStorage);
-      setAnswers(userData.answers);
+      setAnswers(userData.quizAnswers);
     }
   }, []);
 
@@ -55,7 +55,7 @@ function QuizProvider({ children }) {
   }
 
   function previousQuestion(question) {
-    Router.push(`/questionario/${question - 1}`);
+    Router.push(`/questionario?question=${question - 1}`);
   }
 
   function nextQuestion(question, answer) {
@@ -65,23 +65,31 @@ function QuizProvider({ children }) {
       LS_USER_DATA_KEY,
       {
         ...user,
-        answers: newAnswers,
-        quizQuestion: question + 1,
+        quizAnswers: newAnswers,
       },
       true,
     );
 
-    if (question > MAX_QUESTIONS) {
+    if (question === MAX_QUESTIONS) {
       const score = calculateQuizScore();
       goToResult(score);
     } else {
-      Router.push(`/questionario/${question + 1}`);
+      Router.push(`/questionario?question=${question + 1}`);
     }
+  }
+
+  function resetProgress() {
+    setAnswers(initialAnswers);
   }
 
   return (
     <QuizContext.Provider
-      value={{ answers, previousQuestion, nextQuestion }}
+      value={{
+        answers,
+        previousQuestion,
+        nextQuestion,
+        resetProgress,
+      }}
     >
       {children}
     </QuizContext.Provider>
