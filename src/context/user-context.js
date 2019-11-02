@@ -13,7 +13,6 @@ function initialState() {
   return {
     email: '',
     name: '',
-    quizStage: 0,
   };
 }
 
@@ -31,7 +30,6 @@ function UserProvider({ children }) {
       setUser({
         email: userData.email,
         name: userData.name,
-        quizStage: userData.quizStage,
       });
     } else if (route === '/questionario' || route === '/resultado') {
       Router.push('/');

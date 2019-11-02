@@ -1,3 +1,5 @@
+import { MAX_QUESTIONS } from 'src/utils/constants';
+
 export function isEmptyObject(object) {
   return (
     typeof object === 'object' && Object.values(object).length === 0
@@ -36,4 +38,8 @@ export function getInitialInvestmentValueScore(value) {
 
 export function emailIsValid(email) {
   return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+}
+
+export function initialAnswers() {
+  return new Array(MAX_QUESTIONS).fill(null);
 }

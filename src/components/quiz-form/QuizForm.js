@@ -1,108 +1,15 @@
 import React from 'react';
-import Router from 'next/router';
+import { useRouter } from 'next/router';
 import { Box } from 'reakit';
 import QuizInput from 'src/components/quiz-form/quiz-input/QuizInput';
 import QuizOptions from 'src/components/quiz-form/quiz-options/QuizOptions';
-import { useUser } from 'src/context/user-context';
-import { setStorage, getStorage } from 'src/utils/storage';
-import { getInitialInvestmentValueScore } from 'src/helpers';
+import { FIRST_QUESTION } from 'src/utils/constants';
 import questions from 'public/static/questions.json';
-import {
-  LS_USER_DATA_KEY,
-  MAX_QUESTIONS,
-  FIRST_QUESTION,
-} from 'src/utils/constants';
 
 export default function QuizForm() {
-  const { user } = useUser();
-  const [stage, setStage] = React.useState(0);
-  const [quizAnswers, setQuizAnswers] = React.useState(() =>
-    new Array(MAX_QUESTIONS).fill(null),
-  );
-
-  React.useEffect(() => {
-    if (user.quizStage > 0) {
-      const userDataStorage = getStorage(LS_USER_DATA_KEY);
-      const userData = JSON.parse(userDataStorage);
-      setQuizAnswers(userData.quizAnswers);
-      setStage(user.quizStage);
-    }
-  }, [user.quizStage]);
-
-  function calculateQuizScore() {
-    return questions.reduce((accumulator, question, index) => {
-      if (index) {
-        const { score } = question.options.find(
-          ({ answer }) => quizAnswers[index] === answer,
-        );
-        return accumulator + score;
-      }
-      return getInitialInvestmentValueScore(quizAnswers[index]);
-    }, 0);
-  }
-
-  function goToResult(quizScore) {
-    Router.push({
-      pathname: '/resultado',
-      query: { quizScore },
-    });
-  }
-
-  function getNewAnswers(answer) {
-    const currentAnswers = quizAnswers.map((value, index) =>
-      index === stage ? answer : value,
-    );
-
-    setQuizAnswers(currentAnswers);
-
-    return currentAnswers;
-  }
-
-  function previousStage() {
-    setStage(prevState => {
-      const newState = prevState - 1;
-
-      setStorage(
-        LS_USER_DATA_KEY,
-        {
-          ...user,
-          quizAnswers,
-          quizStage: newState,
-        },
-        true,
-      );
-
-      return newState;
-    });
-  }
-
-  function nextStage(answer) {
-    const newAnswers = getNewAnswers(answer);
-
-    setStage(prevState => {
-      const newState = prevState + 1;
-
-      setStorage(
-        LS_USER_DATA_KEY,
-        {
-          ...user,
-          quizAnswers: newAnswers,
-          quizStage: newState,
-        },
-        true,
-      );
-
-      return newState;
-    });
-  }
-
-  if (stage === MAX_QUESTIONS) {
-    const score = calculateQuizScore();
-    goToResult(score);
-    return null;
-  }
-
-  const { question } = questions[stage];
+  const router = useRouter();
+  const question = parseInt(router.query.question, 10);
+  const { description } = questions[question - 1];
 
   return (
     <Box className="h-screen">
@@ -111,21 +18,13 @@ export default function QuizForm() {
           <Box className="m-auto w-120 sm-max:w-auto">
             <Box className="px-6 py-4">
               <p className="text-gray-700 text-lg font-bold text-center">
-                {question}
+                {description}
               </p>
             </Box>
-            {stage === FIRST_QUESTION ? (
-              <QuizInput
-                answer={quizAnswers[FIRST_QUESTION]}
-                nextStage={nextStage}
-              />
+            {question === FIRST_QUESTION ? (
+              <QuizInput />
             ) : (
-              <QuizOptions
-                stage={stage}
-                previousStage={previousStage}
-                nextStage={nextStage}
-                quizAnswers={quizAnswers}
-              />
+              <QuizOptions />
             )}
           </Box>
         </Box>

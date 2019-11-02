@@ -5,7 +5,6 @@ import { LinkButton, Button } from 'src/components/button/Button';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import Icon from 'src/components/icon/Icon';
 import useMedia from 'src/hooks/useMedia';
-import { isEmptyObject, emailIsValid } from 'src/helpers';
 import { useUser } from 'src/context/user-context';
 import { setStorage } from 'src/utils/storage';
 import { LS_USER_DATA_KEY } from 'src/utils/constants';
@@ -16,6 +15,11 @@ import {
   unstable_FormInput as FormInput,
   unstable_FormMessage as FormMessage,
 } from 'reakit/Form';
+import {
+  isEmptyObject,
+  emailIsValid,
+  initialAnswers,
+} from 'src/helpers';
 
 export default function EntryData() {
   const matchMediaQuery = useMedia('(max-width: 1024px)');
@@ -48,9 +52,9 @@ export default function EntryData() {
     },
     onSubmit: values => {
       const userData = {
-        quizStage: 0,
         email: values.email,
         name: values.name,
+        quizAnswers: initialAnswers(),
       };
 
       setUser(() => {
@@ -89,7 +93,7 @@ export default function EntryData() {
                 <Icon reactIcon={MdArrowBack} className="mr-2" />
                 Voltar
               </Button>
-              <Link href="/questionario">
+              <Link href="/questionario?question=1">
                 <LinkButton>
                   Prosseguir
                   <Icon reactIcon={MdArrowForward} className="ml-2" />

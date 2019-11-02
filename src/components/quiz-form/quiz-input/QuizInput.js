@@ -1,12 +1,13 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import Link from 'next/link';
 import { MdArrowBack, MdArrowForward } from 'react-icons/md';
 import useInputMask from 'src/hooks/useInputMask';
 import { createNumberMask } from 'text-mask-addons';
+import { useQuiz } from 'src/context/quiz-context';
 import { LinkButton, Button } from 'src/components/button/Button';
 import Icon from 'src/components/icon/Icon';
 import useInputMutationObserver from 'src/hooks/useInputMutationObserver';
+import { FIRST_QUESTION } from 'src/utils/constants';
 
 function FormMessage() {
   const {
@@ -44,7 +45,9 @@ function SubmitButton() {
   );
 }
 
-export default function QuizInput({ answer, nextStage }) {
+export default function QuizInput() {
+  const { answers, nextQuestion } = useQuiz();
+  const answer = answers[FIRST_QUESTION - 1];
   const input = React.useRef(null);
 
   const maskMoney = createNumberMask({
@@ -87,7 +90,7 @@ export default function QuizInput({ answer, nextStage }) {
 
   function handleSubmit(event) {
     event.preventDefault();
-    nextStage(input.current.value);
+    nextQuestion(FIRST_QUESTION, input.current.value);
   }
 
   return (
@@ -128,12 +131,3 @@ export default function QuizInput({ answer, nextStage }) {
     </form>
   );
 }
-
-QuizInput.defaultProps = {
-  answer: null,
-};
-
-QuizInput.propTypes = {
-  nextStage: PropTypes.func.isRequired,
-  answer: PropTypes.string,
-};

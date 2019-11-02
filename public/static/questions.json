@@ -1,10 +1,10 @@
 [
   {
-    "question": "Quanto você tem para começar a investir?",
+    "description": "Quanto você tem para começar a investir?",
     "options": []
   },
   {
-    "question": "Qual a sua idade?",
+    "description": "Qual a sua idade?",
     "options": [
       {
         "score": 3,
@@ -25,7 +25,7 @@
     ]
   },
   {
-    "question": "Você pretende investir seu dinheiro por um período de tempo de",
+    "description": "Você pretende investir seu dinheiro por um período de tempo de",
     "options": [
       {
         "score": 0,
@@ -46,7 +46,7 @@
     ]
   },
   {
-    "question": "Sua experiência com investimentos pode ser aproximadamente descrita como alguém que",
+    "description": "Sua experiência com investimentos pode ser aproximadamente descrita como alguém que",
     "options": [
       {
         "score": 0,
@@ -67,7 +67,7 @@
     ]
   },
   {
-    "question": "Ao aplicar R$ 10 mil pelo prazo de um ano, você:",
+    "description": "Ao aplicar R$ 10 mil pelo prazo de um ano, você:",
     "options": [
       {
         "score": 1,
@@ -84,7 +84,7 @@
     ]
   },
   {
-    "question": "O principal objetivo de seus investimentos pode ser aproximadamente descrito em",
+    "description": "O principal objetivo de seus investimentos pode ser aproximadamente descrito em",
     "options": [
       {
         "score": 0,

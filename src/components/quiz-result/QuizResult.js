@@ -7,6 +7,7 @@ import ResultChart from 'src/components/result-chart/ResultChart';
 import { useUser } from 'src/context/user-context';
 import investorProfileDescription from 'public/static/investor-profile-description.json';
 import Legends from 'src/components/result-chart/Legends';
+import { useQuiz } from 'src/context/quiz-context';
 import {
   CONSERVATIVE_PROFILE_LIMIT,
   AGRESSIVE_PROFILE_LIMIT,
@@ -17,6 +18,7 @@ import {
 
 export default function Result() {
   const [emailSent, setEmailSent] = React.useState(false);
+  const { resetProgress } = useQuiz();
   const {
     user: { name, email },
   } = useUser();
@@ -73,6 +75,7 @@ export default function Result() {
   }, [emailSent, email, name, investorProfile]);
 
   function retakeQuiz() {
+    resetProgress();
     Router.push('/dados-iniciais');
   }
 
