@@ -17,4 +17,8 @@ module.exports = withCSS({
 
     return config;
   },
+  env: {
+    DEV_URL: 'http://localhost',
+    PROD_URL: 'https://my-investiment-portfolio.pauloh1288.now.sh',
+  },
 });

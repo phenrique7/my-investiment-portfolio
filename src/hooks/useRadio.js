@@ -6,6 +6,8 @@ export default function useRadio(initialState) {
   React.useEffect(() => {
     if (initialState) {
       setRadioState(initialState);
+    } else {
+      setRadioState(null);
     }
   }, [initialState]);
 

@@ -45,21 +45,23 @@ export default function Result() {
 
   React.useEffect(() => {
     async function triggerEmailSending() {
+      const url =
+        process.env.NODE_ENV === 'development'
+          ? process.env.DEV_URL
+          : process.env.PROD_URL;
+
       try {
-        const res = await fetch(
-          'http://192.168.15.7:3000/send-email',
-          {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-            },
-            body: JSON.stringify({
-              name,
-              email,
-              investorProfile,
-            }),
+        const res = await fetch(`${url}:3000/send-email`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
           },
-        );
+          body: JSON.stringify({
+            name,
+            email,
+            investorProfile,
+          }),
+        });
 
         await res.json();
       } catch (error) {

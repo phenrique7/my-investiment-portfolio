@@ -25,15 +25,15 @@ function QuizProvider({ children }) {
     }
   }, []);
 
-  function calculateQuizScore() {
+  function calculateQuizScore(quizAnswers) {
     return questions.reduce((accumulator, question, index) => {
       if (index) {
         const { score } = question.options.find(
-          ({ answer }) => answers[index] === answer,
+          ({ answer }) => quizAnswers[index] === answer,
         );
         return accumulator + score;
       }
-      return getInitialInvestmentValueScore(answers[index]);
+      return getInitialInvestmentValueScore(quizAnswers[index]);
     }, 0);
   }
 
@@ -71,7 +71,7 @@ function QuizProvider({ children }) {
     );
 
     if (question === MAX_QUESTIONS) {
-      const score = calculateQuizScore();
+      const score = calculateQuizScore(newAnswers);
       goToResult(score);
     } else {
       Router.push(`/questionario?question=${question + 1}`);
